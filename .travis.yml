@@ -1,0 +1,19 @@
+
+language: python
+python:
+    - '3.8'
+
+install:
+    - pip install -r requirements-dev.txt
+
+env:
+    - PYTHONPATH=/home/travis/build/zx811/flask-api
+
+script:
+    - make tests
+
+#after_success:
+#    - ./deploy.sh
+#
+#notifications:
+#  slack: devopsnyu:vAFcJBgAP2f73SqhWgb40Gjf
