@@ -1,0 +1,54 @@
+List is subject to change. Not all items may not make it to final list
+Main food items:
+	Pancakes
+	Waffles
+	Sandwich
+	Steak
+	Sampler
+	Soup of the Day (Algorithm to randomize the soup every day)
+
+Sides:
+	Bacon
+	French Fries
+	Mashed Potatos
+	Corn
+	Sausage
+	Hash Browns
+	Tater Tots
+	Bread (What kind?)
+	Biscuit/Cookies (Depending on what English you use)
+	Salad
+	Onion Rings
+
+Dessert:
+	Crepes
+	Cake
+	Brownies
+	Cookies
+	Milk Shakes
+	Banana Split
+	Sundaes
+	Pie
+	Pretzel
+	Churos
+	
+Beverages:
+	Water
+	Coffee (Iced/Normal)
+	Latte
+	Cappachini
+	Machioto
+	Tea	
+	Soda
+	Redbull
+	Dom Perinogne
+	Juices (OJ, Apple, etc.)
+	
+Toppings:
+	Cinammon
+	Chocolate Chips
+	Fruits
+	Veggies
+	Onions
+	Cheese
+	Siracha
