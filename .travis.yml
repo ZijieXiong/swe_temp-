@@ -7,7 +7,7 @@ install:
     - pip install -r requirements-dev.txt
 
 env:
-    - PYTHONPATH=/home/travis/build/zx811/flask-api
+    - PYTHONPATH=/home/travis/build/zx811/swe_temp-
 
 script:
     - make tests
