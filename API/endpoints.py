@@ -50,7 +50,7 @@ class Pets(Resource):
         """
         This method returns all pets.
         """
-        return db.fetch_pets()
+        return db.get_rooms()
 
 
 @api.route('/create_user/<username>')
