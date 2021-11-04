@@ -24,15 +24,17 @@ Information Page on what the restaurant/business is about
 </ul>
 
 ## Command
-<make prod - build production/>
-<make dev_env - create env for new developer/>
-<make tests - run provided tests locally/>
-
+<ul>
+<li>make prod - build production</li>  
+<li>make dev_env - create env for new developer</li>  
+<li>make tests - run provided tests locally</li>  
+</ul>
 
 ## TODO Immediate
-<Homepage/>
+<ul>
+<li>Homepage</li>  
+</ul>
+##----------  
+To build production, type `make prod`.  
 
-##----------
-<To build production, type `make prod`./>
-
-<To create the env for a new developer, run `make dev_env`./>
+To create the env for a new developer, run `make dev_env`.  
