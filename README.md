@@ -8,9 +8,8 @@ Basic Menu containing:
 
 	Drinks  
 
-</ul>
-<Ability to order online/>
-<Ability to choose toppings and additions />
+Ability to order online  
+Ability to choose toppings and additions  
   
 <ul>
     ###<Create Data:/>
