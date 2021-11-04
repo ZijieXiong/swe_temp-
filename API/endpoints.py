@@ -63,3 +63,15 @@ class CreateUser(Resource):
         this method adds user to the chatroom
         """
         return username
+
+
+@api.route('/food_menu')
+class FoodMenu(Resource):
+    """
+    This class returns the food menu to user
+    """
+    def get(self):
+        """
+        This method return the food menu
+        """
+        return db.get_food_menu()

@@ -28,3 +28,10 @@ def get_rooms():
             return json.loads(file.read())
     except FileNotFoundError:
         return None
+
+
+def get_food_menu():
+    """
+    A function to return food menu stored in data base
+    """
+    return {"drink": {"coffee": 7, "coke": 2.5}, "maindish": {"fried rice": 7}}
