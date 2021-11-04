@@ -10,13 +10,8 @@ Basic Menu containing:
 Ability to order online  
 Ability to choose toppings and additions  
   
-<ul>
-    ###<Create Data:/>
-	<li>User can make a reservation by using the '\make_reservation' endpoint. User needs to type a name and choose a time slot</li>
-	###<Update Data/> 
-	###<Read Data:/>
-	<li>User can view list of food items from the '\food_menu' endpoint</li>
-	###<Delete Data/>
+<li>User can make a reservation by using the '\make_reservation' endpoint. User needs to type a name and choose a time slot</li>  
+<li>User can view list of food items from the '\food_menu' endpoint</li>  
 </ul>
 
 ## Design
