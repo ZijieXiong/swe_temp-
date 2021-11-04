@@ -10,6 +10,7 @@ import os
 SWE_HOME = os.environ["SWE_HOME"]
 
 ROOMS_DB = f"{SWE_HOME}/db/rooms.json"
+FOOD_MENU_DB = f"{SWE_HOME}/db/food_menu.json"
 
 
 def fetch_pets():
@@ -34,4 +35,8 @@ def get_food_menu():
     """
     A function to return food menu stored in data base
     """
-    return {"drink": {"coffee": 7, "coke": 2.5}, "maindish": {"fried rice": 7}}
+    try:
+        with open(FOOD_MENU_DB) as file:
+            return json.loads(file.read())
+    except FileNotFoundError:
+        return None
