@@ -4,9 +4,8 @@ Restaurant Requirements
 Information Page on what the restaurant/business is about  
 
 Basic Menu containing:  
-	Food Items  
-
-	Drinks  
+        Food Items  
+        Drinks  
 
 Ability to order online  
 Ability to choose toppings and additions  
