@@ -2,32 +2,44 @@
 Restaurant Requirements
 ## Requirements
 Information Page on what the restaurant/business is about
-Basic Menu containing:
-	Food Items
-	Drinks
-Ability to order online
-Ability to make a reservation
-Ability to choose toppings/additions
+<ul>
+<Basic Menu containing:/>
+	<li>Food Items</li>
+	<li>Drinks</li>
+</ul>
+<Ability to order online/>
+<Ability to choose toppings and additions />
+  
+<ul>
+    ###<Create Data:/>
+	<li>User can make a reservation by using the '\make_reservation' endpoint. User needs to type a name and choose a time slot</li>
+	###<Update Data/> 
+	###<Read Data:/>
+	<li>User can view list of food items from the '\food_menu' endpoint</li>
+	###<Delete Data/>
+</ul>
 
 ## Design
-Use REACT to build website for frontend
-Use Node/Flask for website backend (Need to ask professor)
-Incorporate APIs:
-	 Reservation services utilizing Calenders, etc.
-	 Location services from Google
-	 Credit/Debit Card payment
-	 Paypal service
+<ul>
+<li>Use REACT to build website for frontend</li>
+<li>Use Node/Flask for website backend (Need to ask professor)</li>
+<li>Incorporate APIs:</li>
+	 <Reservation services utilizing Calenders, etc./>
+	 <Location services from Google/>
+	 <Credit/Debit Card payment/>
+	 <Paypal service/>
+</ul>
 
 ## Command
-make prod - build production
-make dev_env - create env for new developer
-make tests - run provided tests locally
+<make prod - build production/>
+<make dev_env - create env for new developer/>
+<make tests - run provided tests locally/>
 
 
 ## TODO Immediate
-Homepage
+<Homepage/>
 
 ##----------
-To build production, type `make prod`.
+<To build production, type `make prod`./>
 
-To create the env for a new developer, run `make dev_env`.
+<To create the env for a new developer, run `make dev_env`./>
