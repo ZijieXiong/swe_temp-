@@ -8,8 +8,8 @@ Information Page on what the restaurant/business is about
          <ul>Drinks</ul>   
 <li>Ability to order online</li>  
 <li>Ability to choose toppings and additions</li>  
-<li>User can make a reservation by using the '\make_reservation' endpoint. User needs to type a name and choose a time slot</li>  
-<li>User can view list of food items from the '\food_menu' endpoint</li>  
+<li>User has the ability to create a reservation</li>  
+<li>User should be able to see a list of the food offered in a menu</li>  
 </ul>
 
 ## Design
@@ -20,7 +20,9 @@ Information Page on what the restaurant/business is about
 	 <ul>Reservation services utilizing Calenders, etc.</ul>  
 	 <ul>Location services from Google</ul>  
 	 <ul>Credit/Debit Card payment</ul>  
-	 <ul>Paypal service</ul>  
+	 <ul>Paypal service</ul>   
+<li>User can make a reservation by using the '\make_reservation' endpoint. User needs to type a name and choose a time slot</li>  
+<li>User can view list of food items from the '\food_menu' endpoint</li>  
 </ul>
 
 ## Command
