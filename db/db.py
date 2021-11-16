@@ -18,6 +18,7 @@ else:
 FOOD_MENU_DB = f"{DB_DIR}/food_menu.json"
 ROOMS_DB = f"{DB_DIR}/rooms.json"
 
+
 def fetch_pets():
     """
     A function to return all pets in the data store.
