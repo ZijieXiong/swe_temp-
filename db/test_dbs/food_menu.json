@@ -1,0 +1,9 @@
+{
+    "drink": {
+        "coffee": 7,
+        "coke": 2.5
+            }, 
+    "maindish": {
+        "fried rice": 7
+        }
+    }

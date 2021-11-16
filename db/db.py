@@ -8,10 +8,15 @@ import json
 import os
 
 SWE_HOME = os.environ["SWE_HOME"]
+TEST_MODE = os.environ.get("TEST_MODE", 0)
 
-ROOMS_DB = f"{SWE_HOME}/db/rooms.json"
-FOOD_MENU_DB = f"{SWE_HOME}/db/food_menu.json"
+if TEST_MODE:
+    DB_DIR = f"{SWE_HOME}/db/test_dbs"
+else:
+    DB_DIR = f"{SWE_HOME}/db"
 
+FOOD_MENU_DB = f"{DB_DIR}/food_menu.json"
+ROOMS_DB = f"{DB_DIR}/rooms.json"
 
 def fetch_pets():
     """
