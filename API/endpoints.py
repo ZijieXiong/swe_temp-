@@ -41,18 +41,6 @@ class Endpoints(Resource):
         return {"Available endpoints": endpoints}
 
 
-@api.route('/pets')
-class Pets(Resource):
-    """
-    This class supports fetching a list of all pets.
-    """
-    def get(self):
-        """
-        This method returns all pets.
-        """
-        return db.get_rooms()
-
-
 @api.route('/create_user/<username>')
 class CreateUser(Resource):
     """

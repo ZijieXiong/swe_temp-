@@ -19,13 +19,6 @@ FOOD_MENU_DB = f"{DB_DIR}/food_menu.json"
 ROOMS_DB = f"{DB_DIR}/rooms.json"
 
 
-def fetch_pets():
-    """
-    A function to return all pets in the data store.
-    """
-    return {"tigers": 2, "lions": 3, "zebras": 1}
-
-
 def get_rooms():
     """
     A function to return all chat rooms

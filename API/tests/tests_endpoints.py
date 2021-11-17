@@ -19,11 +19,6 @@ class EndpointTestCase(TestCase):
         self.assertIsInstance(ret, dict)
         self.assertIn(ep.HELLO, ret)
 
-    def test_pets(self):
-        pets = ep.Pets(Resource)
-        ret = pets.get()
-        self.assertIsInstance(ret, dict)
-
     def test_food_menu1(self):
         """
         Post-condition 1: return is a dictionary
