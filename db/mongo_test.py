@@ -14,7 +14,10 @@ It assumes that cause that's what we've been using!
 import sys
 import json
 import pymongo as pm
+import bson
 from pymongo.server_api import ServerApi
 
 client = pm.MongoClient()
 print(client)
+db = client["sweDB"]
+print(db)

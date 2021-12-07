@@ -19,6 +19,7 @@ FOOD_MENU_DB = f"{DB_DIR}/food_menu.json"
 ROOMS_DB = f"{DB_DIR}/rooms.json"
 
 
+
 def read_collection(perm_version):
     """
     A function to read a colleciton off of disk.
