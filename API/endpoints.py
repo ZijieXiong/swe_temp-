@@ -63,3 +63,15 @@ class FoodMenu(Resource):
         This method return the food menu
         """
         return db.get_food_menu()
+
+
+@api.route('/drink_menu')
+class DrinkMenu(Resource):
+    """
+    This class returns the food menu to user
+    """
+    def get(self):
+        """
+        This method returns the drink menu
+        """
+        return db.get_drink_menu()

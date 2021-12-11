@@ -1,7 +1,11 @@
 {
-    "drink": {
-        "coffee": 7,
-        "coke": 2.5
+    "Main food items": {
+        "Pancakes": 10.0,
+        "Waffles": 10.5,
+        "Sandwich": 9.0,
+        "Steak": 15.0,
+        "Sampler": 13.0,
+        "Soup of the day": 7.0
             }, 
     "maindish": {
         "fried rice": 7

@@ -1,0 +1,17 @@
+{
+    "Beverages": {
+        "Sparkling Water": 3.0,
+        "Coffee": 2.5,
+        "Latte": 3.0,
+        "Cappuccino": 3.0,
+        "Tea": 2.5,
+        "Soda": 2.0, 
+        "Joices": 3.0
+            }, 
+    "Alcoholic Beverages": {
+        "Wine": 7.0,
+        "Beer": 6.5,
+        "Mimosa": 11.0,
+        "Bloody Mary": 11.0
+        }
+    }
