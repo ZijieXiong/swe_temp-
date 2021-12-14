@@ -30,8 +30,8 @@ OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
 
-client = dbc.get_client()
-if client is None:
+dbc.client = dbc.get_client()
+if dbc.client is None:
     print("Failed to connect to MongoDB.")
     exit(1)
 else:
