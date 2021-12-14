@@ -75,3 +75,15 @@ class DrinkMenu(Resource):
         This method returns the drink menu
         """
         return db.get_drink_menu()
+
+
+@api.route('/room')
+class Room(Resource):
+    """
+    This class returns the rooms to user
+    """
+    def get(self):
+        """
+        This method return the rooms
+        """
+        return db.get_rooms

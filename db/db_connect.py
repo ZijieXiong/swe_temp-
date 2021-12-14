@@ -16,6 +16,9 @@ cloud_mdb = "mongodb+srv"
 db_params = "retryWrites=true&w=majority"
 db_nm = "sweDB"
 
+REMOTE = "0"
+LOCAL = "1"
+
 client = None
 
 
@@ -26,16 +29,33 @@ def get_client():
     Also set global client variable.
     """
     global client
-    if os.environ.get("LOCAL_MONGO", False):
+    if os.environ.get("LOCAL_MONGO", REMOTE) == LOCAL:
+        print("Connecting to Mongo locally")
         client = pm.MongoClient()
     else:
+        print("Connecting to Mongo remotely")
         client = pm.MongoClient(f"mongodb+srv://{user_nm}:{passwd}.@{cloud_db}"
                                 + f"/{db_nm}?{db_params}",
                                 server_api=ServerApi('1'))
     return client
 
 
+def fetch_one(collect_nm, filters={}):
+    """
+    Fetch one record that meets filters.
+    """
+    return client[db_nm][collect_nm].find_one(filters)
+
+
+def del_one(collect_nm, filters={}):
+    """
+    Delete one record that meets filters.
+    """
+    return client[db_nm][collect_nm].delete_one(filters)
+
+
 def fetch_all(collect_nm, key_nm):
+    "Fetch all record in one sheet"
     all_docs = {}
     for doc in client[db_nm][collect_nm].find():
         print(doc)
@@ -44,4 +64,5 @@ def fetch_all(collect_nm, key_nm):
 
 
 def insert_doc(collect_nm, doc):
+    "Insert one record to a sheet"
     client[db_nm][collect_nm].insert_one(doc)
