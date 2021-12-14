@@ -9,7 +9,7 @@ from pymongo.server_api import ServerApi
 
 # all of these will eventually be put in the env:
 user_nm = "Pancake"
-cloud_db = "pancakeflippers.7bgdg.mongodb.net"
+cloud_db = "swe.njqsr.mongodb.net/myFirstDatabase"
 passwd = "Waffles"
 # os.environ.get("MONGO_PASSWD", '')
 cloud_mdb = "mongodb+srv"
@@ -34,7 +34,7 @@ def get_client():
         client = pm.MongoClient()
     else:
         print("Connecting to Mongo remotely")
-        client = pm.MongoClient(f"mongodb+srv://{user_nm}:{passwd}.@{cloud_db}"
+        client = pm.MongoClient(f"{cloud_mdb}://{user_nm}:{passwd}.@{cloud_db}"
                                 + f"/{db_nm}?{db_params}",
                                 server_api=ServerApi('1'))
     return client
