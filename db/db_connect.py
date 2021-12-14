@@ -9,7 +9,7 @@ from pymongo.server_api import ServerApi
 
 # all of these will eventually be put in the env:
 user_nm = "Pancake"
-cloud_db = "swe.njqsr.mongodb.net/myFirstDatabase"
+cloud_db = "swe.njqsr.mongodb.net"
 passwd = "Waffles"
 # os.environ.get("MONGO_PASSWD", '')
 cloud_mdb = "mongodb+srv"
