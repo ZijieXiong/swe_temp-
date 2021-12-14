@@ -86,4 +86,4 @@ class Room(Resource):
         """
         This method return the rooms
         """
-        return db.get_rooms
+        return db.get_rooms()
