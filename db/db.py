@@ -19,6 +19,7 @@ else:
 
 DB_DIR = f"{SWE_HOME}/db"
 FOOD_MENU_DB = f"{DB_DIR}/food_menu.json"
+DRINK_MENU_DB=f"{DB_DIR}/drink_menu.json"
 ROOMS_DB = f"{DB_DIR}/rooms.json"
 
 client = dbc.get_client()
@@ -49,3 +50,9 @@ def get_food_menu():
     A function to return food menu stored in data base
     """
     return read_collection(FOOD_MENU_DB)
+
+def get_drink_menu():
+    """
+    A function to return drink menu stored in data base
+    """
+    return read_collection(DRINK_MENU_DB)
