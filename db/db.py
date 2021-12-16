@@ -22,8 +22,21 @@ FOOD_MENU_DB = f"{DB_DIR}/food_menu.json"
 DRINK_MENU_DB=f"{DB_DIR}/drink_menu.json"
 ROOMS_DB = f"{DB_DIR}/rooms.json"
 
-client = dbc.get_client()
-print(client)
+FOOD_MENU = "foodMenu"
+ROOMS = "rooms"
+
+ROOM_NM = "roomName"
+
+OK = 0
+NOT_FOUND = 1
+DUPLICATE = 2
+
+dbc.client = dbc.get_client()
+if dbc.client is None:
+    print("Failed to connect to MongoDB.")
+    exit(1)
+else:
+    print("Successfully connect to MongoDB.")
 
 
 def read_collection(perm_version):
@@ -42,7 +55,7 @@ def get_rooms():
     """
     A function to return all chat rooms
     """
-    return read_collection(ROOMS_DB)
+    return dbc.fetch_all(ROOMS, ROOM_NM)
 
 
 def get_food_menu():
