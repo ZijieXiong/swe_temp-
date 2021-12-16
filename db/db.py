@@ -24,6 +24,7 @@ ROOMS_DB = f"{DB_DIR}/rooms.json"
 
 FOOD_MENU = "foodMenu"
 ROOMS = "rooms"
+DRINK_MENU = "drinkMenu"
 
 ROOM_NM = "roomName"
 
