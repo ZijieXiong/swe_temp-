@@ -5,7 +5,7 @@ import os
 import json
 import pymongo as pm
 import bson.json_util as bsutil
-from pymongo.server_api import ServerApi
+# from pymongo.server_api import ServerApi
 
 # all of these will eventually be put in the env:
 user_nm = "PANCAKE"
@@ -37,8 +37,7 @@ def get_client():
     else:
         print("Connecting to Mongo remotely")
         client = pm.MongoClient(f"{cloud_mdb}://{user_nm}:{passwd}@{cloud_db}"
-                                + f"/{db_nm}?{db_params}",
-                                server_api=ServerApi('1'))
+                                + f"/{db_nm}?{db_params}")
     return client
 
 
@@ -57,9 +56,10 @@ def del_one(collect_nm, filters={}):
 
 
 def fetch_all(collect_nm, key_nm):
-    "Fetch all record in one sheet"
     all_docs = {}
-    for doc in client[db_nm][collect_nm].find():
+    cursor = client[db_nm][collect_nm].find({})
+    for doc in cursor:
+        print(doc)
         all_docs[doc[key_nm]] = json.loads(bsutil.dumps(doc))
     return all_docs
 
