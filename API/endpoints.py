@@ -77,7 +77,7 @@ class CreateReserve(Resource):
         """
         This method adds a reservation record to reservation db
         """
-        return f"new order added."
+        return "new order added."
 
 
 @api.route('/food_menu/list')
