@@ -13,6 +13,7 @@ def test_get_food_menu(self):
         """
         menu = db.get_food_menu()
         self.assertIsInstance(menu, dict)
+        
 def test_get_drink_menu(self):
         """
         Can we fetch user db?

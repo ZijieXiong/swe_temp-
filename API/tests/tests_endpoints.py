@@ -23,7 +23,7 @@ class EndpointTestCase(TestCase):
         """
         Post-condition 1: return is a dictionary
         """
-        fm = ep.FoodMenu(Resource)
+        fm = ep.ListFoodMenu(Resource)
         ret = fm.get()
         self.assertIsInstance(ret, dict)
     
@@ -31,7 +31,7 @@ class EndpointTestCase(TestCase):
         """
         Post-condition 2: keys to the dictionary are strings
         """
-        fm = ep.FoodMenu(Resource)
+        fm = ep.ListFoodMenu(Resource)
         ret = fm.get()
         for key in ret:
             self.assertIsInstance(key, str)
@@ -40,7 +40,7 @@ class EndpointTestCase(TestCase):
         """
         Post-condition 3: values in the dict are dicts too.
         """
-        fm = ep.FoodMenu(Resource)
+        fm = ep.ListFoodMenu(Resource)
         ret = fm.get()
         for val in ret.values():
             self.assertIsInstance(val, dict)

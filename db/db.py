@@ -25,8 +25,10 @@ ROOMS_DB = f"{DB_DIR}/rooms.json"
 FOOD_MENU = "foodMenu"
 ROOMS = "rooms"
 DRINK_MENU = "drinkMenu"
+RESERVE = "reservation"
 
 ROOM_NM = "roomName"
+RESERVE_USER = "userName"
 
 OK = 0
 NOT_FOUND = 1
@@ -57,6 +59,13 @@ def get_rooms():
     A function to return all chat rooms
     """
     return dbc.fetch_all(ROOMS, ROOM_NM)
+
+
+def get_reserve():
+    """
+    A function to return all reservations
+    """
+    return dbc.fetch_all(RESERVE, RESERVE_USER)
 
 
 def get_food_menu():

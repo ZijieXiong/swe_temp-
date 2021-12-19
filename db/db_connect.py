@@ -59,8 +59,20 @@ def fetch_all(collect_nm, key_nm):
     all_docs = {}
     cursor = client[db_nm][collect_nm].find({})
     for doc in cursor:
-        print(doc)
         all_docs[doc[key_nm]] = json.loads(bsutil.dumps(doc))
+    return all_docs
+
+
+def fetch_all_id(collect_nm):
+    """
+    This method would return a dictionary use a completely new id as key
+    """
+    all_docs = {}
+    cursor = client[db_nm][collect_nm].find({})
+    i = 0
+    for doc in cursor:
+        all_docs[i] = json.loads(bsutil.dumps(doc))
+        i = i + 1
     return all_docs
 
 

@@ -3,6 +3,7 @@ This is the file containing all of the endpoints for our flask app.
 The endpoint called `endpoints` will return all available endpoints.
 """
 
+from http import HTTPStatus
 from flask import Flask
 from flask_restx import Resource, Api
 import db.db as db
@@ -53,8 +54,34 @@ class CreateUser(Resource):
         return username
 
 
-@api.route('/food_menu')
-class FoodMenu(Resource):
+@api.route('/reserve/list')
+class ListReservation(Resource):
+    """
+    This class returns the food menu to user
+    """
+    def get(self):
+        """
+        This method return the food menu
+        """
+        return db.get_reserve()
+
+
+@api.route('/reserve/create/<userName>&<time>&<numOfPeople>')
+class CreateReserve(Resource):
+    """
+    This class create a new record of reservation
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
+    def post(self, userName, time, numOfPeople=1):
+        """
+        This method adds a reservation record to reservation db
+        """
+        return f"new order added."
+
+
+@api.route('/food_menu/list')
+class ListFoodMenu(Resource):
     """
     This class returns the food menu to user
     """
@@ -65,8 +92,8 @@ class FoodMenu(Resource):
         return db.get_food_menu()
 
 
-@api.route('/drink_menu')
-class DrinkMenu(Resource):
+@api.route('/drink_menu/list')
+class ListDrinkMenu(Resource):
     """
     This class returns the food menu to user
     """
@@ -75,15 +102,3 @@ class DrinkMenu(Resource):
         This method returns the drink menu
         """
         return db.get_drink_menu()
-
-
-@api.route('/room')
-class Room(Resource):
-    """
-    This class returns the rooms to user
-    """
-    def get(self):
-        """
-        This method return the rooms
-        """
-        return db.get_rooms()
