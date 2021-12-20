@@ -7,6 +7,7 @@ from http import HTTPStatus
 from flask import Flask
 from flask_restx import Resource, Api
 import db.db as db
+import werkzeug.exceptions as wz
 
 
 app = Flask(__name__)
@@ -66,18 +67,23 @@ class ListReservation(Resource):
         return db.get_reserve()
 
 
-@api.route('/reserve/create/<userName>&<time>&<numOfPeople>')
+@api.route('/reserve/create/<userName>&<time>&<int:numOfPeople>')
 class CreateReserve(Resource):
     """
     This class create a new record of reservation
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
-    def post(self, userName, time, numOfPeople=1):
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, userName, time, numOfPeople):
         """
         This method adds a reservation record to reservation db
         """
-        return "new order added."
+        ret = db.add_reserve(userName, time, numOfPeople)
+        if ret == db.DUPLICATE:
+            raise(wz.NotAcceptable("Reservation already exists."))
+        else:
+            return "new order added."
 
 
 @api.route('/food_menu/list')

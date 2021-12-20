@@ -5,6 +5,14 @@ This file holds the tests for endpoints.py
 from unittest import TestCase, skip
 from flask_restx import Resource, Api
 import API.endpoints as ep
+import db.db as db
+import random
+
+HUGE_NUM = 100000000000
+
+def new_entity_name(entity_type):
+    int_name = random.randint(0, HUGE_NUM)
+    return f"new {entity_type}" + str(int_name)
 
 class EndpointTestCase(TestCase):
     def setUp(self):
@@ -44,4 +52,32 @@ class EndpointTestCase(TestCase):
         ret = fm.get()
         for val in ret.values():
             self.assertIsInstance(val, dict)
+
+    def test_list_reservation1(self):
+        """
+        Post-condition 1: return is a dictionary
+        """
+        fm = ep.ListReservation(Resource)
+        ret = fm.get()
+        self.assertIsInstance(ret, dict)
+    
+    def test_list_reservation(self):
+        """
+        Post-condition 2: values in dicts are dict too
+        """
+        fm = ep.ListReservation(Resource)
+        ret = fm.get()
+        for val in ret.values():
+            self.assertIsInstance(val, dict)
+
+    def test_add_reservation(self):
+        """
+        Test if we can successfully create a new reservation.
+        """
+        cr = ep.CreateReserve(Resource)
+        new_reserve = new_entity_name("reserve")
+        ret = cr.post(new_reserve, "2021-12-19 00:35:33.134848", 1)
+        print(f"{ret=}")
+        self.assertTrue(db.reserve_exists(new_reserve, "2021-12-19 00:35:33.134848", 1))
+
 

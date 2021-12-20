@@ -11,12 +11,6 @@ import db.db_connect as dbc
 SWE_HOME = os.environ["SWE_HOME"]
 TEST_MODE = os.environ.get("TEST_MODE", 0)
 
-if TEST_MODE:
-    # need to be switched to test db
-    DB_NAME = "sweDB"
-else:
-    DB_NAME = "sweDB"
-
 DB_DIR = f"{SWE_HOME}/db"
 FOOD_MENU_DB = f"{DB_DIR}/food_menu.json"
 DRINK_MENU_DB = f"{DB_DIR}/drink_menu.json"
@@ -29,6 +23,8 @@ RESERVE = "reservation"
 
 ROOM_NM = "roomName"
 RESERVE_USER = "userName"
+TIME = "time"
+NUM_OF_PEOPLE = "numOfPeople"
 
 OK = 0
 NOT_FOUND = 1
@@ -65,7 +61,34 @@ def get_reserve():
     """
     A function to return all reservations
     """
-    return dbc.fetch_all(RESERVE, RESERVE_USER)
+    return dbc.fetch_all_id(RESERVE)
+
+
+def reserve_exists(userName, time, numOfUsers):
+    """
+    See if a reservation already exists in a db.
+    Return True or False
+    """
+    rec = dbc.fetch_one(
+        RESERVE,
+        filters={RESERVE_USER: userName, TIME: time,
+                 NUM_OF_PEOPLE: numOfUsers})
+    print(f"{rec=}")
+    return rec is not None
+
+
+def add_reserve(userName, time, numOfUsers):
+    """
+    Add a reservation record to the reservation db.
+    """
+    print(f"{userName=}")
+    if reserve_exists(userName, time, numOfUsers):
+        return DUPLICATE
+    else:
+        dbc.insert_doc(RESERVE,
+                       {RESERVE_USER: userName, TIME: time,
+                        NUM_OF_PEOPLE: numOfUsers})
+        return OK
 
 
 def get_food_menu():
