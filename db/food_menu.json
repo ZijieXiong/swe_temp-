@@ -7,12 +7,8 @@
         "Sampler": 13.0,
         "Soup of the day": 7.0
             }, 
+    
     "maindish": {
-        "fried rice": 7,
-        "spagetti": 
-        },
-    "sidedish": {
-        "French Fries": 3.5
-    }
-        
+        "fried rice": 7
+      }
 }
