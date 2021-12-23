@@ -10,7 +10,6 @@
         "Monday": {
             "Tomato soup": 7.0
         },
-
         "Tuesday": {
             "French Onion soup": 7.0
         },
@@ -20,22 +19,16 @@
         "Thursday": {
             "Chicken noodle soup": 7.0
         },
-
         "Friday": {
             "Clam Chowder": 7.0
         },
-
         "Saturday": {
             "Vegetable soup": 7.0
-
         },
-
         "Sunday": {
             "Lentil soup": 7.0
-
         }
     },
-
     "maindish": {
         "fried rice": 7
       }
