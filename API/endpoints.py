@@ -125,7 +125,8 @@ class ListDrinkMenu(Resource):
         This method returns the drink menu
         """
         return db.get_drink_menu()
-    
+
+
 """
 @api.route('/soupoftheday/list')
 class SoupOfTheDay(Resource):
