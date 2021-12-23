@@ -108,3 +108,13 @@ class ListDrinkMenu(Resource):
         This method returns the drink menu
         """
         return db.get_drink_menu()
+    
+"""
+@api.route('/soupoftheday/list')
+class SoupOfTheDay(Resource):
+    # Soup of the day: Dictionary with day as key and different soup as value
+    def get(self):
+        #This method will return the soup of the day
+
+        return db.get_soup_of_the_day()
+"""
