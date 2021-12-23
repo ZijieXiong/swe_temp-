@@ -4,32 +4,10 @@
         "Waffles": 10.5,
         "Sandwich": 9.0,
         "Steak": 15.0,
-        "Sampler": 13.0
-    }, 
-    "Soup of the day": {
-        "Monday": {
-            "Tomato soup": 7.0
-        },
-        "Tuesday": {
-            "French Onion soup": 7.0
-        },
-        "Wednesday": {
-            "Broccoli Cheddar soup": 7.0
-        },
-        "Thursday": {
-            "Chicken noodle soup": 7.0
-        },
-        "Friday": {
-            "Clam Chowder": 7.0
-        },
-        "Saturday": {
-            "Vegetable soup": 7.0
-        },
-        "Sunday": {
-            "Lentil soup": 7.0
-        }
-    },
+        "Sampler": 13.0,
+        "Soup of the day": 7.0
+            }, 
     "maindish": {
         "fried rice": 7
-      }
-}
+        }
+    }
