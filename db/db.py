@@ -132,6 +132,7 @@ def get_drink_menu():
     """
     return read_collection(DRINK_MENU_DB)
 
+
 """
 def get_soup_of_the_day(perm_version):
     "A function to return the soup of the day"
