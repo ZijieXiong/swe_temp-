@@ -82,7 +82,7 @@ class EndpointTestCase(TestCase):
 
     def test_add_food_item(self):
         """
-        Test if we can successfully add a new food item to the food_menu db.
+        Test if we can successfully add/create a new food item
         """
         fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
