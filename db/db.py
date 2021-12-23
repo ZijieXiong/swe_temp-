@@ -26,6 +26,9 @@ RESERVE_USER = "userName"
 TIME = "time"
 NUM_OF_PEOPLE = "numOfPeople"
 
+FOOD_NAME = "foodName"
+PRICE = "price"
+
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
@@ -88,6 +91,31 @@ def add_reserve(userName, time, numOfUsers):
         dbc.insert_doc(RESERVE,
                        {RESERVE_USER: userName, TIME: time,
                         NUM_OF_PEOPLE: numOfUsers})
+        return OK
+
+
+def food_item_exists(foodName, price):
+    """
+    See if a specific food item already exists in db
+    """
+    rec = dbc.fetch_one(
+            FOOD_MENU_DB,
+            filters={FOOD_NAME: foodName, PRICE: price})
+    print(f"{rec=}")
+    return rec is not None
+
+
+def add_food_item(foodName, price):
+    """
+    Add a food item to the food_menu db
+    """
+    print(f"{foodName=}")
+    if food_item_exists(foodName, price):
+        return DUPLICATE
+    else:
+        dbc.insert_doc(FOOD_MENU_DB,
+                       {FOOD_NAME: foodName,
+                        PRICE: price})
         return OK
 
 
