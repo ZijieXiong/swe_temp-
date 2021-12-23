@@ -131,3 +131,18 @@ def get_drink_menu():
     A function to return drink menu stored in data base
     """
     return read_collection(DRINK_MENU_DB)
+
+"""
+def get_soup_of_the_day(perm_version):
+    "A function to return the soup of the day"
+
+    "Iterate through soup of the day file"
+    try:
+        with open(perm_version) as f:
+            file_read = json.load(f)
+            for i in file_read['Soup of the day']['Friday']:
+                print(i)
+    except FileNotFoundError:
+        print(f"{perm_version} not found.")
+        return None
+"""

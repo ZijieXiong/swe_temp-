@@ -28,7 +28,15 @@ class DBTestCase(TestCase):
                 """
                 menu = db.get_drink_menu()
                 self.assertIsInstance(menu, dict)
+        """
+        def test_get_soup(self):
 
+                #Fetching soup options from db
+
+                menu = db.get_soup_of_the_day()
+                self.assertIsInstance(menu, dict)
+        """
+          
         def test_reserve_exists1(self):
                 """
                 Test if we can check if a reservation record really exists
