@@ -8,8 +8,6 @@ from flask import Flask
 from flask_restx import Resource, Api
 import db.db as db
 import werkzeug.exceptions as wz
-
-
 app = Flask(__name__)
 api = Api(app)
 HELLO = 'hello'
@@ -86,6 +84,25 @@ class CreateReserve(Resource):
             return "new order added."
 
 
+@api.route('/food_menu/new/<foodName>&<price>')
+class NewFoodItem(Resource):
+    """
+    This class creates a new food item for the menu
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, foodName, price):
+        """
+        This method adds a new food item the food_menu db
+        """
+        ret = db.add_food_item(foodName, price)
+        if ret == db.DUPLICATE:
+            raise(wz.NotAcceptable("Food Item already exists."))
+        else:
+            return "food item added."
+
+
 @api.route('/food_menu/list')
 class ListFoodMenu(Resource):
     """
@@ -108,3 +125,14 @@ class ListDrinkMenu(Resource):
         This method returns the drink menu
         """
         return db.get_drink_menu()
+
+
+"""
+@api.route('/soupoftheday/list')
+class SoupOfTheDay(Resource):
+    # Soup of the day: Dictionary with day as key and different soup as value
+    def get(self):
+        #This method will return the soup of the day
+
+        return db.get_soup_of_the_day()
+"""

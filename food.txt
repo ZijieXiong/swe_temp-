@@ -30,18 +30,18 @@ Dessert:
 	Sundaes
 	Pie
 	Pretzel
-	Churos
+	Churros
 	
 Beverages:
 	Water
 	Coffee (Iced/Normal)
 	Latte
-	Cappachini
-	Machioto
+	Cappuchino
+	Macchiato
 	Tea	
 	Soda
 	Redbull
-	Dom Perinogne
+	Pellegrino
 	Juices (OJ, Apple, etc.)
 	
 Toppings:

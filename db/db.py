@@ -26,6 +26,9 @@ RESERVE_USER = "userName"
 TIME = "time"
 NUM_OF_PEOPLE = "numOfPeople"
 
+FOOD_NAME = "foodName"
+PRICE = "price"
+
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
@@ -91,6 +94,31 @@ def add_reserve(userName, time, numOfUsers):
         return OK
 
 
+def food_item_exists(foodName, price):
+    """
+    See if a specific food item already exists in db
+    """
+    rec = dbc.fetch_one(
+            FOOD_MENU,
+            filters={FOOD_NAME: foodName, PRICE: price})
+    print(f"{rec=}")
+    return rec is not None
+
+
+def add_food_item(foodName, price):
+    """
+    Add a food item to the food_menu db
+    """
+    print(f"{foodName=}")
+    if food_item_exists(foodName, price):
+        return DUPLICATE
+    else:
+        dbc.insert_doc(FOOD_MENU,
+                       {FOOD_NAME: foodName,
+                        PRICE: price})
+        return OK
+
+
 def get_food_menu():
     """
     A function to return food menu stored in data base
@@ -103,3 +131,19 @@ def get_drink_menu():
     A function to return drink menu stored in data base
     """
     return read_collection(DRINK_MENU_DB)
+
+
+"""
+def get_soup_of_the_day(perm_version):
+    "A function to return the soup of the day"
+
+    "Iterate through soup of the day file"
+    try:
+        with open(perm_version) as f:
+            file_read = json.load(f)
+            for i in file_read['Soup of the day']['Friday']:
+                print(i)
+    except FileNotFoundError:
+        print(f"{perm_version} not found.")
+        return None
+"""

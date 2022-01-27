@@ -80,4 +80,13 @@ class EndpointTestCase(TestCase):
         print(f"{ret=}")
         self.assertTrue(db.reserve_exists(new_reserve, "2021-12-19 00:35:33.134848", 1))
 
+    def test_add_food_item(self):
+        """
+        Test if we can successfully add/create a new food item
+        """
+        fi = ep.NewFoodItem(Resource)
+        new_food_item = new_entity_name("food_name")
+        ret = fi.post(new_food_item, 00.00)
+        print(f"{ret=}")
+        self.assertTrue(db.food_item_exists(new_food_item, 00.00))
 
