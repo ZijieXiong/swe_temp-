@@ -6,10 +6,17 @@ Information Page on what the restaurant/business is about
 <li>Basic Menu containing:</li>  
          <ul>Food Items</ul>    
          <ul>Drinks</ul>   
+<li>User should be able to see a list of the food offered in a menu</li>  
+<li>users can login to the website</li>
+<li>There should be two types of users: customers and managers</li>
+<li>Customers have:</li>
 <li>Ability to order online</li>  
 <li>Ability to choose toppings and additions</li>  
-<li>User has the ability to create a reservation</li>  
-<li>User should be able to see a list of the food offered in a menu</li>  
+<li>Ability to create a reservation</li>  
+<li></li>
+<li>Mangers have:</li>
+<li>Ability to check all orders</li>
+<li>Ability to check all reservations</li>
 </ul>
 
 ## Design
