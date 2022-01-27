@@ -10,9 +10,11 @@ env:
     - PYTHONPATH=/home/travis/build/zx811/swe_temp-
 
 script:
-    - gem install faraday -v 1.9.3
     - make all_tests
-
+    
+before_deploy:
+  - rvm $(travis_internal_ruby) --fuzzy do ruby -S gem install faraday -v 1.8.0
+  
 # deploy to heroku on push to master
 deploy:
     - provider: heroku
