@@ -86,7 +86,7 @@ class EndpointTestCase(TestCase):
         """
         fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
-        ret = fi.post(new_food_item, 00.00)
+        ret = fi.post(new_food_item)
         print(f"{ret=}")
-        self.assertTrue(db.food_item_exists(new_food_item, 00.00))
+        self.assertTrue(db.food_item_exists(new_food_item))
 

@@ -48,3 +48,4 @@ class DBTestCase(TestCase):
                 Test if we can check if a reservation record does not exists
                 """
                 self.assertFalse(db.reserve_exists('Sam', '2021-12-19 00:35:33.134848', 1))
+
