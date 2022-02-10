@@ -21,6 +21,12 @@ class EndpointTestCase(TestCase):
     def tearDown(self):
         pass;
 
+    def test_register_user(self):
+        rg = ep.RegisterUser(Resource)
+        new_user = new_entity_name("user")
+        ret = rg.post(new_user, "123456", 1)
+        self.assertTrue(db.user_exists(new_user))
+
     def test_hello(self):
         hello = ep.HelloWorld(Resource)
         ret = hello.get()

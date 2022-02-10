@@ -16,13 +16,18 @@ FOOD_MENU_DB = f"{DB_DIR}/food_menu.json"
 DRINK_MENU_DB = f"{DB_DIR}/drink_menu.json"
 ROOMS_DB = f"{DB_DIR}/rooms.json"
 
+USER = "users"
+USER_NAME = "userName"
+PASSWORD = "password"
+USER_TYPE = "type"
+
 FOOD_MENU = "foodMenu"
 ROOMS = "rooms"
 DRINK_MENU = "drinkMenu"
 RESERVE = "reservation"
 
+
 ROOM_NM = "roomName"
-RESERVE_USER = "userName"
 TIME = "time"
 NUM_OF_PEOPLE = "numOfPeople"
 
@@ -60,6 +65,39 @@ def get_rooms():
     return dbc.fetch_all(ROOMS, ROOM_NM)
 
 
+def get_users():
+    """
+    A function to return all users
+    """
+    return dbc.fetch_all(USER, USER_NAME)
+
+
+def user_exists(userName):
+    """
+    See if a user already exists in a db.
+    Return True or False
+    """
+    rec = dbc.fetch_one(
+        USER,
+        filters={USER_NAME: userName})
+    return rec is not None
+
+
+def add_user(userName, password, type):
+    """
+    Add a user record to the users db
+    """
+    if(user_exists(userName)):
+        return DUPLICATE
+    else:
+        dbc.insert_doc(
+            USER,
+            {USER_NAME: userName,
+             PASSWORD: password,
+             USER_TYPE: type})
+        return OK
+
+
 def get_reserve():
     """
     A function to return all reservations
@@ -74,9 +112,8 @@ def reserve_exists(userName, time, numOfUsers):
     """
     rec = dbc.fetch_one(
         RESERVE,
-        filters={RESERVE_USER: userName, TIME: time,
+        filters={USER_NAME: userName, TIME: time,
                  NUM_OF_PEOPLE: numOfUsers})
-    print(f"{rec=}")
     return rec is not None
 
 
@@ -84,12 +121,11 @@ def add_reserve(userName, time, numOfUsers):
     """
     Add a reservation record to the reservation db.
     """
-    print(f"{userName=}")
     if reserve_exists(userName, time, numOfUsers):
         return DUPLICATE
     else:
         dbc.insert_doc(RESERVE,
-                       {RESERVE_USER: userName, TIME: time,
+                       {USER_NAME: userName, TIME: time,
                         NUM_OF_PEOPLE: numOfUsers})
         return OK
 
@@ -101,7 +137,6 @@ def food_item_exists(foodName):
     rec = dbc.fetch_one(
             FOOD_MENU,
             filters={FOOD_NAME: foodName})
-    print(f"{rec=}")
     return rec is not None
 
 
@@ -109,7 +144,6 @@ def add_food_item(foodName):
     """
     Add a food item to the food_menu db
     """
-    print(f"{foodName=}")
     if food_item_exists(foodName):
         return DUPLICATE
     else:
