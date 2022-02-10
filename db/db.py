@@ -72,6 +72,14 @@ def get_users():
     return dbc.fetch_all(USER, USER_NAME)
 
 
+def get_user(userName):
+    """
+    A function to return one user with the user name
+    """
+    return dbc.fetch_one(
+        USER, filters={USER_NAME: userName})
+
+
 def user_exists(userName):
     """
     See if a user already exists in a db.
