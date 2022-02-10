@@ -15,19 +15,38 @@ class DBTestCase(TestCase):
         def tearDown(self):
             pass
 
+        def test_get_users(self):
+            """
+            Can we fetch user db?
+            """
+            users = db.get_users()
+            self.assertIsInstance(users, dict)
+
+        def test_user_exists1(self):
+            """
+            Test if we can check if a user really exists
+            """
+            self.assertTrue(db.user_exists("zx811"))
+
+        def test_user_exists2(self):
+            """
+            Test if we can check if a user does not exists
+            """
+            self.assertFalse(db.user_exists("__"))
+
         def test_get_food_menu(self):
-                """
-                Can we fetch user db?
-                """
-                menu = db.get_food_menu()
-                self.assertIsInstance(menu, dict)
+            """
+            Can we fetch food menu?
+            """
+            menu = db.get_food_menu()
+            self.assertIsInstance(menu, dict)
                 
         def test_get_drink_menu(self):
-                """
-                Can we fetch user db?
-                """
-                menu = db.get_drink_menu()
-                self.assertIsInstance(menu, dict)
+            """
+            Can we fetch user db?
+            """
+            menu = db.get_drink_menu()
+            self.assertIsInstance(menu, dict)
         """
         def test_get_soup(self):
 
@@ -38,16 +57,16 @@ class DBTestCase(TestCase):
         """
           
         def test_reserve_exists1(self):
-                """
-                Test if we can check if a reservation record really exists
-                """
-                self.assertTrue(db.reserve_exists('Tom', '2021-12-19 00:35:33.134848', 1))
+            """
+            Test if we can check if a reservation record really exists
+            """
+            self.assertTrue(db.reserve_exists('Tom', '2021-12-19 00:35:33.134848', 1))
 
         def test_reserve_exists2(self):
-                """
-                Test if we can check if a reservation record does not exists
-                """
-                self.assertFalse(db.reserve_exists('Sam', '2021-12-19 00:35:33.134848', 1))
+            """
+            Test if we can check if a reservation record does not exists
+            """
+            self.assertFalse(db.reserve_exists('Sam', '2021-12-19 00:35:33.134848', 1))
 
         def test_food_exists(self):
                 """

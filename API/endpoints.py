@@ -84,6 +84,24 @@ class CreateReserve(Resource):
             return "new order added."
 
 
+@api.route('/register/<userName>&<password>&<int:type>')
+class RegisterUser(Resource):
+    """
+    This class create a new record of a user
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, userName, password, type):
+        """
+        this method adds a new user to user db
+        """
+        ret = db.add_user(userName, password, type)
+        if ret == db.DUPLICATE:
+            raise(wz.NotAcceptable("User already exists."))
+        else:
+            return "new user added"
+
+
 @api.route('/food_menu/new/<foodName>')
 class NewFoodItem(Resource):
     """
