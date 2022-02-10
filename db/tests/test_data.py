@@ -49,3 +49,10 @@ class DBTestCase(TestCase):
                 """
                 self.assertFalse(db.reserve_exists('Sam', '2021-12-19 00:35:33.134848', 1))
 
+        def test_food_exists(self):
+                """
+                Test if a specific food item entry in the food db actually exists
+                """
+                self.assertTrue(db.food_item_exists('Pancake'))
+
+
