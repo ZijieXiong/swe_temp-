@@ -152,6 +152,13 @@ def add_food_item(foodName):
         return OK
 
 
+def get_food():
+    """
+    Function to return the food menu within the mongo database
+    """
+    return dbc.fetch_all_id(FOOD_MENU)
+
+
 def get_food_menu():
     """
     A function to return food menu stored in data base

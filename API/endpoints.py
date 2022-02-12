@@ -122,6 +122,18 @@ class NewFoodItem(Resource):
 
 
 @api.route('/food_menu/list')
+class ListFood(Resource):
+    """
+    This class returns the food menu
+    """
+    def get(self):
+        """
+        This method returns the food menu
+        """
+        return db.get_food()
+
+
+@api.route('/food_menu/list')
 class ListFoodMenu(Resource):
     """
     This class returns the food menu to user

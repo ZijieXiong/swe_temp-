@@ -32,7 +32,7 @@ class EndpointTestCase(TestCase):
         ret = hello.get()
         self.assertIsInstance(ret, dict)
         self.assertIn(ep.HELLO, ret)
-
+    
     def test_food_menu1(self):
         """
         Post-condition 1: return is a dictionary
