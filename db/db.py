@@ -17,14 +17,15 @@ DRINK_MENU_DB = f"{DB_DIR}/drink_menu.json"
 ROOMS_DB = f"{DB_DIR}/rooms.json"
 
 USER = "users"
-USER_NAME = "userName"
-PASSWORD = "password"
-USER_TYPE = "type"
 
 FOOD_MENU = "foodMenu"
 ROOMS = "rooms"
 DRINK_MENU = "drinkMenu"
 RESERVE = "reservation"
+
+USER_NAME = "userName"
+PASSWORD = "password"
+USER_TYPE = "type"
 
 
 ROOM_NM = "roomName"
@@ -70,6 +71,14 @@ def get_users():
     A function to return all users
     """
     return dbc.fetch_all(USER, USER_NAME)
+
+
+def get_user(userName):
+    """
+    A function to return one user with the user name
+    """
+    return dbc.fetch_one(
+        USER, filters={USER_NAME: userName})
 
 
 def user_exists(userName):

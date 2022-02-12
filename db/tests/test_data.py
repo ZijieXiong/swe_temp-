@@ -22,6 +22,13 @@ class DBTestCase(TestCase):
             users = db.get_users()
             self.assertIsInstance(users, dict)
 
+        def test_get_user(self):
+            """
+            Can we fetch one specific user?
+            """
+            user = db.get_user("zx811")
+            self.assertTrue(user["password"] == "ForzaMilano")
+
         def test_user_exists1(self):
             """
             Test if we can check if a user really exists

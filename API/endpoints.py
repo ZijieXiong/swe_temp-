@@ -102,6 +102,27 @@ class RegisterUser(Resource):
             return "new user added"
 
 
+@api.route('/login/<userName>&<password>')
+class LogIn(Resource):
+    """
+    This class check if the user name and
+    password matched the record in database.
+    """
+    def post(self, userName, password):
+        """
+        this method checks if user name and
+        password exists in database and
+        return the type of the user.
+        return 0 if not matched.
+        """
+        if(db.user_exists(userName)):
+            user = db.get_user(userName)
+            print(user)
+            if(user["password"] == password):
+                return(user["type"])
+        return 0
+
+
 @api.route('/food_menu/new/<foodName>')
 class NewFoodItem(Resource):
     """
