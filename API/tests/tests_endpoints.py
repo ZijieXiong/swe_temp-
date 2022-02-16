@@ -21,6 +21,30 @@ class EndpointTestCase(TestCase):
     def tearDown(self):
         pass;
 
+    def test_log_in1(self):
+        """
+        Test if we can login with valid account and password
+        """
+        li = ep.LogIn(Resource)
+        ret = li.post("zx811", "ForzaMilano")
+        self.assertIsInstance(ret, int)
+
+    def test_log_in2(self):
+        """
+        Test if we can login with invalid account
+        """
+        li = ep.LogIn(Resource)
+        ret = li.post("", "123")
+        self.assertTrue(ret == 0)
+
+    def test_log_in3(self):
+        """
+        Test if we can login with a valid account and a invalid password
+        """    
+        li = ep.LogIn(Resource)
+        ret = li.post("zx811", "")
+        self.assertTrue(ret == 0)
+
     def test_register_user(self):
         rg = ep.RegisterUser(Resource)
         new_user = new_entity_name("user")
@@ -83,7 +107,6 @@ class EndpointTestCase(TestCase):
         cr = ep.CreateReserve(Resource)
         new_reserve = new_entity_name("reserve")
         ret = cr.post(new_reserve, "2021-12-19 00:35:33.134848", 1)
-        print(f"{ret=}")
         self.assertTrue(db.reserve_exists(new_reserve, "2021-12-19 00:35:33.134848", 1))
 
     def test_add_food_item(self):
@@ -93,6 +116,5 @@ class EndpointTestCase(TestCase):
         fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
         ret = fi.post(new_food_item)
-        print(f"{ret=}")
         self.assertTrue(db.food_item_exists(new_food_item))
 

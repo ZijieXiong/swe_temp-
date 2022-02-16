@@ -115,11 +115,11 @@ class LogIn(Resource):
         return the type of the user.
         return 0 if not matched.
         """
-        if(db.user_exists(userName)):
-            user = db.get_user(userName)
-            print(user)
-            if(user["password"] == password):
-                return(user["type"])
+        if(userName != ""):
+            if(db.user_exists(userName)):
+                user = db.get_user(userName)
+                if(user["password"] == password):
+                    return(user["type"])
         return 0
 
 
