@@ -107,6 +107,18 @@ def add_user(userName, password, type):
         return OK
 
 
+def delete_user(userName):
+    """
+    Deletes a user record from the users db
+    """
+    if(user_exists(userName)):
+        dbc.del_one(USER,
+                    {USER_NAME: userName})
+        return OK
+    else:
+        return NOT_FOUND
+
+
 def get_reserve():
     """
     A function to return all reservations

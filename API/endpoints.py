@@ -102,6 +102,24 @@ class RegisterUser(Resource):
             return "new user added"
 
 
+@api.route('/register/<userName>')
+class DeleteUser(Resource):
+    """
+    This class deletes an existing record of a specific user
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'User not  found')
+    def post(self, userName):
+        """
+        this method deletes a user from the user db
+        """
+        ret = db.delete_user(userName)
+        if ret != db.NOT_FOUND:
+            raise(wz.NotAcceptable("User could not be found."))
+        else:
+            return "User deleted"
+
+
 @api.route('/login/<userName>&<password>')
 class LogIn(Resource):
     """
