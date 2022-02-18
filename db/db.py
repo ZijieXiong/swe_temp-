@@ -161,6 +161,18 @@ def add_food_item(foodName):
         return OK
 
 
+def delete_food_item(foodName):
+    """
+    Deletes a food item from the food_menu db
+    """
+    if food_item_exists(foodName):
+        dbc.del_one(FOOD_MENU,
+                    {FOOD_NAME: foodName})
+        return OK
+    else:
+        return NOT_FOUND
+
+
 def get_food():
     """
     Function to return the food menu within the mongo database

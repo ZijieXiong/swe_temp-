@@ -142,6 +142,24 @@ class NewFoodItem(Resource):
             return "food item added."
 
 
+@api.route('/food_menu/delete/<foodName>')
+class DeleteFoodItem(Resource):
+    """
+    This class deletes an existing food item from the menu
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
+    def post(self, foodName):
+        """
+        This method will delete a food item from the food_menu db
+        """
+        ret = db.delete_food_item(foodName)
+        if ret == db.NOT_FOUND:
+            raise(wz.NotAcceptable("Item could not be found."))
+        else:
+            return "food item deleted."
+
+
 @api.route('/food_menu/list')
 class ListFood(Resource):
     """
