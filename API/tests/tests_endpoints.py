@@ -46,11 +46,14 @@ class EndpointTestCase(TestCase):
         self.assertTrue(ret == 0)
 
     def test_register_user(self):
+        """
+        Test if we can register a new user with unduplicated username
+        """
         rg = ep.RegisterUser(Resource)
         new_user = new_entity_name("user")
         ret = rg.post(new_user, "123456", 1)
         self.assertTrue(db.user_exists(new_user))
-
+    
     def test_hello(self):
         hello = ep.HelloWorld(Resource)
         ret = hello.get()
@@ -107,7 +110,7 @@ class EndpointTestCase(TestCase):
         cr = ep.CreateReserve(Resource)
         new_reserve = new_entity_name("reserve")
         ret = cr.post(new_reserve, "2021-12-19 00:35:33.134848", 1)
-        self.assertTrue(db.reserve_exists(new_reserve, "2021-12-19 00:35:33.134848", 1))
+        self.assertTrue(db.reserve_exists(new_reserve, "2021-12-19 00:35:33.134848"))
 
     def test_add_food_item(self):
         """

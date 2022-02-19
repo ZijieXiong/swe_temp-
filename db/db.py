@@ -126,15 +126,14 @@ def get_reserve():
     return dbc.fetch_all_id(RESERVE)
 
 
-def reserve_exists(userName, time, numOfUsers):
+def reserve_exists(userName, time):
     """
     See if a reservation already exists in a db.
     Return True or False
     """
     rec = dbc.fetch_one(
         RESERVE,
-        filters={USER_NAME: userName, TIME: time,
-                 NUM_OF_PEOPLE: numOfUsers})
+        filters={USER_NAME: userName, TIME: time})
     return rec is not None
 
 
@@ -142,13 +141,25 @@ def add_reserve(userName, time, numOfUsers):
     """
     Add a reservation record to the reservation db.
     """
-    if reserve_exists(userName, time, numOfUsers):
+    if reserve_exists(userName, time):
         return DUPLICATE
     else:
         dbc.insert_doc(RESERVE,
                        {USER_NAME: userName, TIME: time,
                         NUM_OF_PEOPLE: numOfUsers})
         return OK
+
+
+def delete_reserve(userName, time):
+    """
+    Delete a reservation record from the reservation db.
+    """
+    if reserve_exists(userName, time):
+        dbc.del_one(RESERVE,
+                    {USER_NAME: userName, TIME: time})
+        return OK
+    else:
+        return NOT_FOUND
 
 
 def food_item_exists(foodName):

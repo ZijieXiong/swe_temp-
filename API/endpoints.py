@@ -84,6 +84,24 @@ class CreateReserve(Resource):
             return "new order added."
 
 
+@api.route('/reserve/delete/<userName>&<time>')
+class DeleteReserve(Resource):
+    """
+    This class deletes an existing record of  a reservation
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'User not found')
+    def post(self, userName, time):
+        """
+        this method deletes a user from the user db
+        """
+        ret = db.delete_reserve(userName, time)
+        if ret == db.NOT_FOUND:
+            raise(wz.NotAcceptable("Reservation could not be found."))
+        else:
+            return "Reservation deleted"
+
+
 @api.route('/register/<userName>&<password>&<int:type>')
 class RegisterUser(Resource):
     """
@@ -108,7 +126,7 @@ class DeleteUser(Resource):
     This class deletes an existing record of a specific user
     """
     @api.response(HTTPStatus.OK, 'Success')
-    @api.response(HTTPStatus.NOT_FOUND, 'User not  found')
+    @api.response(HTTPStatus.NOT_FOUND, 'User not found')
     def post(self, userName):
         """
         this method deletes a user from the user db

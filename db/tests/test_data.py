@@ -67,13 +67,13 @@ class DBTestCase(TestCase):
             """
             Test if we can check if a reservation record really exists
             """
-            self.assertTrue(db.reserve_exists('Tom', '2021-12-19 00:35:33.134848', 1))
+            self.assertTrue(db.reserve_exists('Tom', '2021-12-19 00:35:33.134848'))
 
         def test_reserve_exists2(self):
             """
             Test if we can check if a reservation record does not exists
             """
-            self.assertFalse(db.reserve_exists('Sam', '2021-12-19 00:35:33.134848', 1))
+            self.assertFalse(db.reserve_exists('Sam', '2021-12-19 00:35:33.134848'))
 
         def test_food_exists(self):
                 """
