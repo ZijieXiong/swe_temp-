@@ -56,11 +56,11 @@ class CreateUser(Resource):
 @api.route('/reserve/list')
 class ListReservation(Resource):
     """
-    This class returns the food menu to user
+    This class returns the list of reservations to user
     """
     def get(self):
         """
-        This method return the food menu
+        This method return the reservations list
         """
         return db.get_reserve()
 
@@ -87,13 +87,13 @@ class CreateReserve(Resource):
 @api.route('/reserve/delete/<userName>&<time>')
 class DeleteReserve(Resource):
     """
-    This class deletes an existing record of  a reservation
+    This class deletes an existing record of a reservation
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'User not found')
     def post(self, userName, time):
         """
-        this method deletes a user from the user db
+        this method deletes an existing reservation record from the reservation db
         """
         ret = db.delete_reserve(userName, time)
         if ret == db.NOT_FOUND:
