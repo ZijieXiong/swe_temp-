@@ -54,14 +54,6 @@ class DBTestCase(TestCase):
             """
             menu = db.get_drink_menu()
             self.assertIsInstance(menu, dict)
-        """
-        def test_get_soup(self):
-
-                #Fetching soup options from db
-
-                menu = db.get_soup_of_the_day()
-                self.assertIsInstance(menu, dict)
-        """
           
         def test_reserve_exists1(self):
             """
@@ -76,9 +68,9 @@ class DBTestCase(TestCase):
             self.assertFalse(db.reserve_exists('Sam', '2021-12-19 00:35:33.134848'))
 
         def test_food_exists(self):
-                """
-                Test if a specific food item entry in the food db actually exists
-                """
-                self.assertTrue(db.food_item_exists('Pancake'))
+            """
+            Test if a specific food item entry in the food db actually exists
+            """
+            self.assertTrue(db.food_item_exists('Pancake'))
 
 
