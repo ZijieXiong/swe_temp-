@@ -122,6 +122,15 @@ class EndpointTestCase(TestCase):
         self.assertTrue(db.food_item_exists(new_food_item))
     
 
+    def test_add_drink_item(self):
+        """
+        Test if we can successfully add/create a new drink item
+        """
+        di = ep.NewDrinkItem(Resource)
+        new_drink_item = new_entity_name("drink_name")
+        ret = di.post(new_drink_item)
+        self.assertTrue(db.drink_item_exists(new_drink_item))
+
     """
     In Progress
     def test_delete_food_item(self):

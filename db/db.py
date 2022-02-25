@@ -216,7 +216,7 @@ def drink_item_exists(drinkName):
     A function that checks if a drink item exists in the drink menu db
     """
     rec = dbc.fetch_one(DRINK_MENU,
-                        filters={DRINK_MENU: drinkName})
+                        filters={DRINK_NAME: drinkName})
     return rec is not None
 
 
