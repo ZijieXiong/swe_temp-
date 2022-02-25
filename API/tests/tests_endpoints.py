@@ -2,6 +2,8 @@
 This file holds the tests for endpoints.py
 """
 
+import string
+from tokenize import String
 from unittest import TestCase, skip
 from flask_restx import Resource, Api
 import API.endpoints as ep
@@ -111,6 +113,19 @@ class EndpointTestCase(TestCase):
         new_reserve = new_entity_name("reserve")
         ret = cr.post(new_reserve, "2021-12-19 00:35:33.134848", 1)
         self.assertTrue(db.reserve_exists(new_reserve, "2021-12-19 00:35:33.134848"))
+
+    def test_del_rserveation(self):
+        """
+        Test if we can successfully delete an existed reservation.
+        """
+        cr = ep.CreateReserve(Resource)
+        new_reserve = new_entity_name("reserve")
+        time = "2021-12-19 00:35:33.134848"
+        cr.post(new_reserve, "2021-12-19 00:35:33.134848", 1)
+        dr = ep.DeleteReserve(Resource)
+        ret = dr.post(new_reserve, "2021-12-19 00:35:33.134848")
+        self.assertIsInstance(ret, str)
+        
 
     def test_add_food_item(self):
         """
