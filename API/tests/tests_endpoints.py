@@ -134,5 +134,3 @@ class EndpointTestCase(TestCase):
         dl = ep.DeleteFoodItem(new_food_item)
         self.assertFalse(db.food_item_exists(new_food_item))
     """
-
-

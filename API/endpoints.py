@@ -223,19 +223,7 @@ class ListFoodMenu(Resource):
         return db.get_food_menu()
 
 
-@api.route('/drink_menu/list')
-class ListDrinkMenu(Resource):
-    """
-    This class returns the drink menu to user
-    """
-    def get(self):
-        """
-        This method returns the drink menu
-        """
-        return db.get_drink_menu()
-
-
-@api.route('/drink_menu/new/<drinkname>')
+@api.route('/drink_menu/new/<drinkName>')
 class NewDrinkItem(Resource):
     """
     This class adds a new drink item to the drink db
@@ -252,3 +240,15 @@ class NewDrinkItem(Resource):
             raise(wz.NotAcceptable("Drink Item already exists."))
         else:
             return "drink item added"
+
+
+@api.route('/drink_menu/list')
+class ListDrinkMenu(Resource):
+    """
+    This class returns the drink menu to user
+    """
+    def get(self):
+        """
+        This method returns the drink menu
+        """
+        return db.get_drink_menu()
