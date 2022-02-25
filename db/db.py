@@ -33,6 +33,7 @@ TIME = "time"
 NUM_OF_PEOPLE = "numOfPeople"
 
 FOOD_NAME = "foodName"
+DRINK_NAME = "drinkName"
 PRICE = "price"
 
 OK = 0
@@ -210,24 +211,29 @@ def get_food_menu():
     return read_collection(FOOD_MENU_DB)
 
 
+def drink_item_exists(drinkName):
+    """
+    A function that checks if a drink item exists in the drink menu db
+    """
+    rec = dbc.fetch_one(DRINK_MENU,
+                        filters={DRINK_MENU: drinkName})
+    return rec is not None
+
+
+def add_drink_item(drinkName):
+    """
+    A function that attempts to add a drink item to the drink db
+    """
+    if drink_item_exists(drinkName):
+        return DUPLICATE
+    else:
+        dbc.insert_doc(DRINK_MENU,
+                       {DRINK_NAME: drinkName})
+        return OK
+
+
 def get_drink_menu():
     """
     A function to return drink menu stored in data base
     """
-    return read_collection(DRINK_MENU_DB)
-
-
-"""
-def get_soup_of_the_day(perm_version):
-    "A function to return the soup of the day"
-
-    "Iterate through soup of the day file"
-    try:
-        with open(perm_version) as f:
-            file_read = json.load(f)
-            for i in file_read['Soup of the day']['Friday']:
-                print(i)
-    except FileNotFoundError:
-        print(f"{perm_version} not found.")
-        return None
-"""
+    return dbc.fetch_all_id(DRINK_MENU)
