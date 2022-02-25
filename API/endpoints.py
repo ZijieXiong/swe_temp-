@@ -226,10 +226,29 @@ class ListFoodMenu(Resource):
 @api.route('/drink_menu/list')
 class ListDrinkMenu(Resource):
     """
-    This class returns the food menu to user
+    This class returns the drink menu to user
     """
     def get(self):
         """
         This method returns the drink menu
         """
         return db.get_drink_menu()
+
+
+@api.route('/drink_menu/new/<drinkname>')
+class NewDrinkItem(Resource):
+    """
+    This class adds a new drink item to the drink db
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, drinkName):
+        """
+        This method adds a new drink item to the drink_menu db
+        """
+        ret = db.add_drink_item(drinkName)
+        if ret == db.DUPLICATE:
+            raise(wz.NotAcceptable("Drink Item already exists."))
+        else:
+            return "drink item added"
