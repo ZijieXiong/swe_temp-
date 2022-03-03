@@ -163,6 +163,24 @@ def delete_reserve(userName, time):
         return NOT_FOUND
 
 
+def update_reserve(userName, time, new_time="", numOfUsers=-1):
+    """
+    Update a reservation record from the reservation db
+    """
+    if reserve_exists(userName, time):
+        dbc.update_one(
+            RESERVE,
+            {USER_NAME: userName, TIME: time},
+            {
+                "$set": {TIME: new_time, NUM_OF_PEOPLE: numOfUsers},
+                "$currentDate": {"LastModified": True}
+            }
+            )
+        return OK
+    else:
+        return NOT_FOUND
+
+
 def food_item_exists(foodName):
     """
     See if a specific food item already exists in db

@@ -7,6 +7,13 @@ from os import POSIX_FADV_SEQUENTIAL
 from unittest import TestCase, skip
 
 import db.db as db
+import random
+
+HUGE_NUM = 100000000000
+
+def new_entity_name(entity_type):
+    int_name = random.randint(0, HUGE_NUM)
+    return f"new {entity_type}" + str(int_name)
 
 class DBTestCase(TestCase):
         def setUp(self):
@@ -66,6 +73,14 @@ class DBTestCase(TestCase):
             Test if we can check if a reservation record does not exists
             """
             self.assertFalse(db.reserve_exists('Sam', '2021-12-19 00:35:33.134848'))
+
+        def test_update_reserve(self):
+            """
+            Test if we can successfully update a reservation record
+            """
+            new_time = new_entity_name("time")
+            db.add_reserve("Tom", new_time, 1)
+            self.assertFalse(db.update_reserve("Tom", new_time, new_time+"1", 2))
 
         def test_food_exists(self):
             """

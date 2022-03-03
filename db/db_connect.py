@@ -79,3 +79,10 @@ def fetch_all_id(collect_nm):
 def insert_doc(collect_nm, doc):
     "Insert one record to a sheet"
     client[db_nm][collect_nm].insert_one(doc)
+
+
+def update_one(collect_nm, filters={}, data={}):
+    """
+    Update one record in a sheet
+    """
+    client[db_nm][collect_nm].update_one(filters, data)
