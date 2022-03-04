@@ -215,6 +215,23 @@ def delete_food_item(foodName):
         return NOT_FOUND
 
 
+def update_food_item(foodName, new_foodName=""):
+    """
+    Change the name of a food item in food_menu db
+    """
+    if food_item_exists(foodName):
+        dbc.update_one(
+            FOOD_MENU,
+            {FOOD_NAME: foodName},
+            {
+                "$set": {FOOD_NAME: new_foodName}
+            }
+            )
+        return OK
+    else:
+        return NOT_FOUND
+
+
 def get_food():
     """
     Function to return the food menu within the mongo database
