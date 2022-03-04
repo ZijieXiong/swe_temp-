@@ -181,7 +181,7 @@ class NewFoodItem(Resource):
             return "food item added."
 
 
-@api.route('/food_menu/delete/<foodName>&<newFoodName>')
+@api.route('/food_menu/delete/<foodName>')
 class DeleteFoodItem(Resource):
     """
     This class deletes an existing food item from the menu
@@ -199,7 +199,7 @@ class DeleteFoodItem(Resource):
             return "food item deleted."
 
 
-@api.route('/food_menu/update/<foodName>')
+@api.route('/food_menu/update/<foodName>&<new_foodName>')
 class UpdateFoodItem(Resource):
     """
     This class updates an existing food item from the menu
