@@ -181,7 +181,7 @@ class NewFoodItem(Resource):
             return "food item added."
 
 
-@api.route('/food_menu/delete/<foodName>')
+@api.route('/food_menu/delete/<foodName>&<newFoodName>')
 class DeleteFoodItem(Resource):
     """
     This class deletes an existing food item from the menu
@@ -197,6 +197,24 @@ class DeleteFoodItem(Resource):
             raise(wz.NotAcceptable("Item could not be found."))
         else:
             return "food item deleted."
+
+
+@api.route('/food_menu/update/<foodName>')
+class UpdateFoodItem(Resource):
+    """
+    This class updates an existing food item from the menu
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
+    def post(self, foodName, new_foodName):
+        """
+        This method will update a food item from the food_menu db
+        """
+        ret = db.update_food_item(foodName, new_foodName)
+        if ret == db.NOT_FOUND:
+            raise(wz.NotAcceptable("Item could not be found."))
+        else:
+            return "food item updated"
 
 
 @api.route('/food_menu/list')
