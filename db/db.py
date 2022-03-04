@@ -279,6 +279,23 @@ def delete_drink_item(drinkName):
         return NOT_FOUND
 
 
+def update_drink_item(drinkName, new_drinkName=""):
+    """
+    Change the name of a food item in food_menu db
+    """
+    if drink_item_exists(drinkName):
+        dbc.update_one(
+            DRINK_MENU,
+            {DRINK_NAME: drinkName},
+            {
+                "$set": {DRINK_NAME: new_drinkName}
+            }
+            )
+        return OK
+    else:
+        return NOT_FOUND
+
+
 def get_drink_menu():
     """
     A function to return drink menu stored in data base
