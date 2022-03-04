@@ -105,6 +105,25 @@ class DeleteReserve(Resource):
             return "Reservation deleted"
 
 
+@api.route('/reserve/update/<userName>&<time>&<newTime>&<int:newNumOfPeople>')
+class UpdateReserve(Resource):
+    """
+    This class updates an existing record of a reservation
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'Reservation not found')
+    def post(self, userName, time, newTime, newNumOfPeople):
+        """
+        this method updates an existing reservation record
+        from the reservation db
+        """
+        ret = db.update_reserve(userName, time, newTime, newNumOfPeople)
+        if ret == db.NOT_FOUND:
+            raise(wz.NotAcceptable("Reservation could not be found."))
+        else:
+            return "Reservation updated"
+
+
 @api.route('/register/<userName>&<password>&<int:type>')
 class RegisterUser(Resource):
     """
