@@ -242,6 +242,24 @@ class NewDrinkItem(Resource):
             return "drink item added"
 
 
+@api.route('/drink_menu/delete/<drinkName>')
+class DeleteDrinkItem(Resource):
+    """
+    This call deletes an existing drink item from drink menu
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'NOT_FOUND')
+    def post(self, drinkName):
+        """
+        This methods attempts to delete a drink item from drink menu
+        """
+        ret = db.delete_drink_item(drinkName)
+        if ret == db.NOT_FOUND:
+            raise(wz.NotAcceptable("Item could not be found."))
+        else:
+            return "drink item deleted."
+
+
 @api.route('/drink_menu/list')
 class ListDrinkMenu(Resource):
     """

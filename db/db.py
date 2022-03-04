@@ -250,6 +250,18 @@ def add_drink_item(drinkName):
         return OK
 
 
+def delete_drink_item(drinkName):
+    """
+    Attempts to delete a drink item from drink_menu db
+    """
+    if drink_item_exists(drinkName):
+        dbc.del_one(DRINK_MENU,
+                    {DRINK_NAME: drinkName})
+        return OK
+    else:
+        return NOT_FOUND
+
+
 def get_drink_menu():
     """
     A function to return drink menu stored in data base
