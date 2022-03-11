@@ -237,25 +237,13 @@ class UpdateFoodItem(Resource):
 
 
 @api.route('/food_menu/list')
-class ListFood(Resource):
+class ListFoodMenu(Resource):
     """
     This class returns the food menu
     """
     def get(self):
         """
         This method returns the food menu
-        """
-        return db.get_food()
-
-
-@api.route('/food_menu/list')
-class ListFoodMenu(Resource):
-    """
-    This class returns the food menu to user
-    """
-    def get(self):
-        """
-        This method return the food menu
         """
         return db.get_food_menu()
 

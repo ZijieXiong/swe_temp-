@@ -232,18 +232,11 @@ def update_food_item(foodName, new_foodName=""):
         return NOT_FOUND
 
 
-def get_food():
+def get_food_menu():
     """
     Function to return the food menu within the mongo database
     """
     return dbc.fetch_all_id(FOOD_MENU)
-
-
-def get_food_menu():
-    """
-    A function to return food menu stored in data base
-    """
-    return read_collection(FOOD_MENU_DB)
 
 
 def drink_item_exists(drinkName):
