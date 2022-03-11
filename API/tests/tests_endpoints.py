@@ -161,3 +161,13 @@ class EndpointTestCase(TestCase):
         ret = fi.post(new_food_item)
         dfi = ep.DeleteFoodItem(Resource)
         self.assertIsInstance(ret, str)
+
+    def test_delete_drink_item(self):
+        """
+        Test if we can successfully delete a drink item after adding a drink item
+        """
+        di = ep.NewDrinkItem(Resource)
+        new_drink_item = new_entity_name("drink_name")
+        ret = di.post(new_drink_item)
+        ddi = ep.DeleteDrinkItem(Resource)
+        self.assertIsInstance(ret, str)
