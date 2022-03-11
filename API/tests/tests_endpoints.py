@@ -151,15 +151,13 @@ class EndpointTestCase(TestCase):
         ret = di.post(new_drink_item)
         self.assertTrue(db.drink_item_exists(new_drink_item))
 
-    """
-    In Progress
+
     def test_delete_food_item(self):
+        """
         Test if we can successfully delete a food item after adding a food item
+        """
         fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
         ret = fi.post(new_food_item)
-        self.assertTrue(db.food_item_exists(new_food_item))
-
-        dl = ep.DeleteFoodItem(new_food_item)
-        self.assertFalse(db.food_item_exists(new_food_item))
-    """
+        dfi = ep.DeleteFoodItem(Resource)
+        self.assertIsInstance(ret, str)
