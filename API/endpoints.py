@@ -313,3 +313,15 @@ class ListDrinkMenu(Resource):
         This method returns the drink menu
         """
         return db.get_drink_menu()
+
+
+@api.route('/drink_menu/type')
+class ListDrinkType(Resource):
+    """
+    This class returns the drink types to user
+    """
+    def get(self):
+        """
+        This method returns the drink types
+        """
+        return db.get_drink_type()
