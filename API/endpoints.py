@@ -221,7 +221,7 @@ class DeleteFoodItem(Resource):
 @api.route('/food_menu/update/<foodName>&<new_foodName>')
 class UpdateFoodItem(Resource):
     """
-    This class updates an existing food item from the menu
+    This class updates an existing food item from the food menu
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
@@ -295,6 +295,24 @@ class DeleteDrinkItem(Resource):
             raise(wz.NotAcceptable("Item could not be found."))
         else:
             return "drink item deleted."
+
+
+@api.route('/drink_menu/update/<drinkName>&<new_drinkName>')
+class UpdateDrinkItem(Resource):
+    """
+    This class updates an existing drink item from the drink menu
+    """
+    @api.response(HTTPStatus.OK, 'SUCCESS')
+    @api.response(HTTPStatus.NOT_FOUND, 'NOT_FOUND')
+    def post(self, drinkName, new_drinkName):
+        """
+        This method will update a drink item from the drink_menu db
+        """
+        ret = db.update_drink_item(drinkName, new_drinkName)
+        if ret == db.NOT_FOUND:
+            raise(wz.notAcceptable("Item could not be found"))
+        else:
+            return "drink item updated"
 
 
 @api.route('/drink_menu/list')
