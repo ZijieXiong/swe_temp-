@@ -297,12 +297,14 @@ def get_drink_menu():
     A function to return drink menu stored in data base
     """
     drink_menu = {}
-    for drinkType in DRINKTYPE:
-        drink_menu[drinkType] = dbc.fetch_all(
+    drink_types = get_drink_type()
+    for value in drink_types.values():
+        print(value)
+        drink_menu[value["typeName"]] = dbc.fetch_all(
             DRINK_MENU,
             DRINK_NAME,
             {
-                TYPE: drinkType
+                TYPE: value["typeName"]
             }
         )
     return drink_menu
