@@ -35,10 +35,12 @@ NUM_OF_PEOPLE = "numOfPeople"
 FOOD_NAME = "foodName"
 DRINK_NAME = "drinkName"
 PRICE = "price"
+TYPE = "type"
 
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
+DRINK_TYPE = ["Alcoholic", "Non alcoholic", "Juice"]
 
 dbc.client = dbc.get_client()
 if dbc.client is None:
@@ -293,4 +295,13 @@ def get_drink_menu():
     """
     A function to return drink menu stored in data base
     """
-    return dbc.fetch_all_id(DRINK_MENU)
+    drink_menu = {}
+    for drinkType in DRINK_TYPE:
+        drink_menu[drinkType] = dbc.fetch_all(
+            DRINK_MENU,
+            DRINK_NAME,
+            {
+                TYPE: drinkType
+            }
+        )
+    return drink_menu

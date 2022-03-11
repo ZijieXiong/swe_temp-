@@ -55,20 +55,20 @@ def del_one(collect_nm, filters={}):
     return client[db_nm][collect_nm].delete_one(filters)
 
 
-def fetch_all(collect_nm, key_nm):
+def fetch_all(collect_nm, key_nm, filters={}):
     all_docs = {}
-    cursor = client[db_nm][collect_nm].find({})
+    cursor = client[db_nm][collect_nm].find(filters)
     for doc in cursor:
         all_docs[doc[key_nm]] = json.loads(bsutil.dumps(doc))
     return all_docs
 
 
-def fetch_all_id(collect_nm):
+def fetch_all_id(collect_nm, filters={}):
     """
     This method would return a dictionary use a completely new id as key
     """
     all_docs = {}
-    cursor = client[db_nm][collect_nm].find({})
+    cursor = client[db_nm][collect_nm].find(filters)
     i = 0
     for doc in cursor:
         all_docs[i] = json.loads(bsutil.dumps(doc))
