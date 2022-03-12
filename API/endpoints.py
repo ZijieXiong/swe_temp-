@@ -5,7 +5,7 @@ The endpoint called `endpoints` will return all available endpoints.
 
 from http import HTTPStatus
 from flask import Flask
-from flask_restx import Resource, Api
+from flask_restx import Resource, Api, reqparse
 from flask_cors import CORS
 import db.db as db
 import werkzeug.exceptions as wz
@@ -248,7 +248,7 @@ class ListFoodMenu(Resource):
         return db.get_food_menu()
 
 
-@api.route('/drink_menu/new/<drinkName>')
+@api.route('/drink_menu/new/<drinkName>&<drinkType>&<int:price>')
 class NewDrinkItem(Resource):
     """
     This class adds a new drink item to the drink db
@@ -256,11 +256,11 @@ class NewDrinkItem(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, drinkName):
+    def post(self, drinkName, drinkType, price):
         """
         This method adds a new drink item to the drink_menu db
         """
-        ret = db.add_drink_item(drinkName)
+        ret = db.add_drink_item(drinkName, drinkType, price)
         if ret == db.DUPLICATE:
             raise(wz.NotAcceptable("Drink Item already exists."))
         else:
@@ -285,18 +285,30 @@ class DeleteDrinkItem(Resource):
             return "drink item deleted."
 
 
-@api.route('/drink_menu/update/<drinkName>&<new_drinkName>')
+drink_parser = reqparse.RequestParser()
+drink_parser.add_argument('new_drinkName', type=str, help='new_drinkName')
+drink_parser.add_argument('new_drinkType', type=str, help='new_drinkType')
+drink_parser.add_argument('new_price', type=int, help='new_price')
+
+
+@api.route('/drink_menu/update/<drinkName>')
 class UpdateDrinkItem(Resource):
     """
     This class updates an existing drink item from the drink menu
     """
+    @api.doc(parser=drink_parser)
     @api.response(HTTPStatus.OK, 'SUCCESS')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT_FOUND')
-    def post(self, drinkName, new_drinkName):
+    def post(self, drinkName):
         """
         This method will update a drink item from the drink_menu db
         """
-        ret = db.update_drink_item(drinkName, new_drinkName)
+        args = drink_parser.parse_args()
+        new_drinkName = args['new_drinkName']
+        new_drinkType = args['new_drinkType']
+        new_price = args['new_price']
+        ret = db.update_drink_item(
+            drinkName, new_drinkName, new_drinkType, new_price)
         if ret == db.NOT_FOUND:
             raise(wz.notAcceptable("Item could not be found"))
         else:

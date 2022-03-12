@@ -35,6 +35,7 @@ FOOD_NAME = "foodName"
 DRINK_NAME = "drinkName"
 PRICE = "price"
 TYPE = "type"
+PRICE = "price"
 
 DRINK_TYPE = 'drinkType'
 
@@ -251,7 +252,7 @@ def drink_item_exists(drinkName):
     return rec is not None
 
 
-def add_drink_item(drinkName):
+def add_drink_item(drinkName, drink_type, price):
     """
     A function that attempts to add a drink item to the drink db
     """
@@ -259,7 +260,11 @@ def add_drink_item(drinkName):
         return DUPLICATE
     else:
         dbc.insert_doc(DRINK_MENU,
-                       {DRINK_NAME: drinkName})
+                       {
+                           DRINK_NAME: drinkName,
+                           TYPE: drink_type,
+                           PRICE: price
+                       })
         return OK
 
 
@@ -275,16 +280,24 @@ def delete_drink_item(drinkName):
         return NOT_FOUND
 
 
-def update_drink_item(drinkName, new_drinkName=""):
+def update_drink_item(
+        drinkName, new_drinkName, new_drinkType, new_price):
     """
     Change the name of a food item in food_menu db
     """
     if drink_item_exists(drinkName):
+        new_data = {}
+        if(new_drinkName is not None):
+            new_data[DRINK_NAME] = new_drinkName
+        if(new_drinkType is not None):
+            new_data[TYPE] = new_drinkType
+        if(new_price is not None):
+            new_data[PRICE] = new_price
         dbc.update_one(
             DRINK_MENU,
             {DRINK_NAME: drinkName},
             {
-                "$set": {DRINK_NAME: new_drinkName}
+                "$set": new_data
             }
             )
         return OK

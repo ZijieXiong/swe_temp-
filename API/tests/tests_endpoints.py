@@ -148,7 +148,7 @@ class EndpointTestCase(TestCase):
         """
         di = ep.NewDrinkItem(Resource)
         new_drink_item = new_entity_name("drink_name")
-        ret = di.post(new_drink_item)
+        ret = di.post(new_drink_item, "Alcoholic", 1)
         self.assertTrue(db.drink_item_exists(new_drink_item))
 
 
@@ -168,6 +168,6 @@ class EndpointTestCase(TestCase):
         """
         di = ep.NewDrinkItem(Resource)
         new_drink_item = new_entity_name("drink_name")
-        ret = di.post(new_drink_item)
+        ret = di.post(new_drink_item, "Alcoholic", 1)
         ddi = ep.DeleteDrinkItem(Resource)
         self.assertIsInstance(ret, str)
