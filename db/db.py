@@ -312,7 +312,6 @@ def get_drink_menu():
     drink_menu = {}
     drink_types = get_drink_type()
     for value in drink_types.values():
-        print(value)
         drink_menu[value["typeName"]] = dbc.fetch_all(
             DRINK_MENU,
             DRINK_NAME,

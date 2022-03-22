@@ -93,6 +93,35 @@ class EndpointTestCase(TestCase):
         for val in ret.values():
             self.assertIsInstance(val, dict)
 
+    def test_drink_menu1(self):
+        """
+        Post-condition 1: return value is a dict.
+        """
+        dm = ep.ListDrinkMenu(Resource)
+        ret = dm.get()
+        self.assertIsInstance(ret, dict)
+
+    def test_drink_menu2(self):
+        """
+        Post-condition 2: values in the dict are dicts too.
+        """
+        dm = ep.ListDrinkMenu(Resource)
+        ret = dm.get()
+        for val in ret.values():
+            self.assertIsInstance(val, dict)
+
+    def test_drink_menu3(self):
+        """
+        Post-condition 3: values in the dict inside the dict are dicts too.
+        """
+        dm = ep.ListDrinkMenu(Resource)
+        ret = dm.get()
+        for val1 in ret.values():
+            print(val1)
+            for val2 in val1.values():
+                print(val2, "\n")
+                self.assertIsInstance(val2, dict)
+
     def test_list_reservation1(self):
         """
         Post-condition 1: return is a dictionary
@@ -148,7 +177,8 @@ class EndpointTestCase(TestCase):
         """
         di = ep.NewDrinkItem(Resource)
         new_drink_item = new_entity_name("drink_name")
-        ret = di.post(new_drink_item, "Alcoholic", 1)
+        drinkType = db.get_drink_type()
+        ret = di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1)
         self.assertTrue(db.drink_item_exists(new_drink_item))
 
 
@@ -168,6 +198,7 @@ class EndpointTestCase(TestCase):
         """
         di = ep.NewDrinkItem(Resource)
         new_drink_item = new_entity_name("drink_name")
-        ret = di.post(new_drink_item, "Alcoholic", 1)
+        drinkType = db.get_drink_type()
+        ret = di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1)
         ddi = ep.DeleteDrinkItem(Resource)
         self.assertIsInstance(ret, str)
