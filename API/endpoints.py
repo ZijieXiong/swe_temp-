@@ -218,18 +218,27 @@ class DeleteFoodItem(Resource):
             return "food item deleted."
 
 
-@api.route('/food_menu/update/<foodName>&<new_foodName>')
+food_parser = reqparse.RequestParser()
+food_parser.add_argument('new_foodName', type=str, help='new_foodName')
+food_parser.add_argument('new_foodType', type=str, help='new_foodType')
+
+
+@api.route('/food_menu/update/<foodName>')
 class UpdateFoodItem(Resource):
     """
     This class updates an existing food item from the food menu
     """
+    @api.doc(parser=food_parser)
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
-    def post(self, foodName, new_foodName):
+    def post(self, foodName):
         """
         This method will update a food item from the food_menu db
         """
-        ret = db.update_food_item(foodName, new_foodName)
+        args = drink_parser.parse_args()
+        new_foodName = args['new_foodName']
+        new_foodType = args['new_foodType']
+        ret = db.update_food_item(foodName, new_foodName, new_foodType)
         if ret == db.NOT_FOUND:
             raise(wz.NotAcceptable("Item could not be found."))
         else:

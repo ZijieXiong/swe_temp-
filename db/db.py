@@ -204,7 +204,10 @@ def add_food_item(foodName, foodType):
         return DUPLICATE
     else:
         dbc.insert_doc(FOOD_MENU,
-                       {FOOD_NAME: foodName, FOOD_TYPE: foodType})
+                       {
+                            FOOD_NAME: foodName,
+                            TYPE: foodType
+                       })
         return OK
 
 
@@ -220,21 +223,24 @@ def delete_food_item(foodName):
         return NOT_FOUND
 
 
-def update_food_item(foodName, new_foodName=""):
+def update_food_item(foodName, new_foodName, new_foodType):
     """
     Change the name of a food item in food_menu db
     """
     if food_item_exists(foodName):
+        new_data = {}
+        if(new_foodName is not None):
+            new_data[FOOD_NAME] = new_foodName
+        if(new_foodType is not None):
+            new_data[TYPE] = new_foodType
         dbc.update_one(
             FOOD_MENU,
             {FOOD_NAME: foodName},
             {
-                "$set": {FOOD_NAME: new_foodName}
+                "$set": new_data
             }
             )
         return OK
-    else:
-        return NOT_FOUND
 
 
 def get_food_menu():

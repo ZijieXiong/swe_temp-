@@ -82,10 +82,4 @@ class DBTestCase(TestCase):
             db.add_reserve("Tom", new_time, 1)
             self.assertFalse(db.update_reserve("Tom", new_time, new_time+"1", 2))
 
-        def test_food_exists(self):
-            """
-            Test if a specific food item entry in the food db actually exists
-            """
-            self.assertTrue(db.food_item_exists('Pancake'))
-
 
