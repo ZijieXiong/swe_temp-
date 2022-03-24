@@ -70,28 +70,25 @@ class EndpointTestCase(TestCase):
         ret = fm.get()
         self.assertIsInstance(ret, dict)
    
-
-
-    """
     def test_food_menu2(self):
-
-        Post-condition 2: keys to the dictionary are strings
-
-        fm = ep.ListFoodMenu(Resource)
-        ret = fm.get()
-        for key in ret:
-            self.assertIsInstance(key, str)
-    """
-
-
-    def test_food_menu3(self):
         """
-        Post-condition 3: values in the dict are dicts too.
+        Post-condition 2: values in the dict are dicts too
         """
         fm = ep.ListFoodMenu(Resource)
         ret = fm.get()
         for val in ret.values():
             self.assertIsInstance(val, dict)
+    """
+    def test_food_menu3(self):
+        Post-condition 3: values in the dict inside the dict are dicts too.
+        fm = ep.ListFoodMenu(Resource)
+        ret = fm.get()
+        for val1 in ret.values():
+            print(val1)
+            for val2 in val1.values():
+                print(val2, "\n")
+                self.assertIsInstance(val2, dict)
+    """
 
     def test_drink_menu1(self):
         """
