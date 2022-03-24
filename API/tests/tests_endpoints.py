@@ -165,9 +165,9 @@ class EndpointTestCase(TestCase):
         """
         Test if we can successfully add/create a new food item
         """
-        fi = ep.NewFoodItem(Resource)
+        fi = ep.NewFoodItem(Resource, "dessert")
         new_food_item = new_entity_name("food_name")
-        ret = fi.post(new_food_item)
+        ret = fi.post(new_food_item, "dessert")
         self.assertTrue(db.food_item_exists(new_food_item))
     
 
@@ -186,9 +186,9 @@ class EndpointTestCase(TestCase):
         """
         Test if we can successfully delete a food item after adding a food item
         """
-        fi = ep.NewFoodItem(Resource)
+        fi = ep.NewFoodItem(Resource, "dessert")
         new_food_item = new_entity_name("food_name")
-        ret = fi.post(new_food_item)
+        ret = fi.post(new_food_item, "dessert")
         dfi = ep.DeleteFoodItem(Resource)
         self.assertIsInstance(ret, str)
 

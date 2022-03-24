@@ -181,7 +181,7 @@ class LogIn(Resource):
         return 0
 
 
-@api.route('/food_menu/new/<foodName>')
+@api.route('/food_menu/new/<foodName>&<foodType>')
 class NewFoodItem(Resource):
     """
     This class creates a new food item for the menu
@@ -189,11 +189,11 @@ class NewFoodItem(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, foodName):
+    def post(self, foodName, foodType):
         """
         This method adds a new food item the food_menu db
         """
-        ret = db.add_food_item(foodName)
+        ret = db.add_food_item(foodName, foodType)
         if ret == db.DUPLICATE:
             raise(wz.NotAcceptable("Food Item already exists."))
         else:

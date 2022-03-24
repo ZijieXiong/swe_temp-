@@ -32,6 +32,7 @@ TIME = "time"
 NUM_OF_PEOPLE = "numOfPeople"
 
 FOOD_NAME = "foodName"
+FOOD_TYPE = "foodType"
 DRINK_NAME = "drinkName"
 PRICE = "price"
 TYPE = "type"
@@ -195,7 +196,7 @@ def food_item_exists(foodName):
     return rec is not None
 
 
-def add_food_item(foodName):
+def add_food_item(foodName, foodType):
     """
     Add a food item to the food_menu db
     """
@@ -203,7 +204,7 @@ def add_food_item(foodName):
         return DUPLICATE
     else:
         dbc.insert_doc(FOOD_MENU,
-                       {FOOD_NAME: foodName})
+                       {FOOD_NAME: foodName, FOOD_TYPE: foodType})
         return OK
 
 
