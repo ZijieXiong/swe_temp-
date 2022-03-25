@@ -62,6 +62,7 @@ class EndpointTestCase(TestCase):
         self.assertIsInstance(ret, dict)
         self.assertIn(ep.HELLO, ret)
     
+
     def test_food_menu1(self):
         """
         Post-condition 1: return is a dictionary
@@ -78,9 +79,11 @@ class EndpointTestCase(TestCase):
         ret = fm.get()
         for val in ret.values():
             self.assertIsInstance(val, dict)
-    """
+    
     def test_food_menu3(self):
+        """
         Post-condition 3: values in the dict inside the dict are dicts too.
+        """
         fm = ep.ListFoodMenu(Resource)
         ret = fm.get()
         for val1 in ret.values():
@@ -88,7 +91,6 @@ class EndpointTestCase(TestCase):
             for val2 in val1.values():
                 print(val2, "\n")
                 self.assertIsInstance(val2, dict)
-    """
 
     def test_drink_menu1(self):
         """
@@ -157,16 +159,15 @@ class EndpointTestCase(TestCase):
         ret = dr.post(new_reserve, "2021-12-19 00:35:33.134848")
         self.assertIsInstance(ret, str)
         
-
     def test_add_food_item(self):
         """
         Test if we can successfully add/create a new food item
         """
-        fi = ep.NewFoodItem(Resource, "dessert")
+        fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
-        ret = fi.post(new_food_item, "dessert")
+        foodType = db.get_food_type()
+        ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"])
         self.assertTrue(db.food_item_exists(new_food_item))
-    
 
     def test_add_drink_item(self):
         """
@@ -177,15 +178,15 @@ class EndpointTestCase(TestCase):
         drinkType = db.get_drink_type()
         ret = di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1)
         self.assertTrue(db.drink_item_exists(new_drink_item))
-
-
+    
     def test_delete_food_item(self):
         """
         Test if we can successfully delete a food item after adding a food item
         """
-        fi = ep.NewFoodItem(Resource, "dessert")
+        fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
-        ret = fi.post(new_food_item, "dessert")
+        foodType = db.get_food_type()
+        ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"])
         dfi = ep.DeleteFoodItem(Resource)
         self.assertIsInstance(ret, str)
 

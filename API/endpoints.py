@@ -257,6 +257,18 @@ class ListFoodMenu(Resource):
         return db.get_food_menu()
 
 
+@api.route('/food_menu/type')
+class ListFoodType(Resource):
+    """
+    This class returns the food types to user
+    """
+    def get(self):
+        """
+        This method returns the food types
+        """
+        return db.get_food_type()
+
+
 @api.route('/drink_menu/new/<drinkName>&<drinkType>&<int:price>')
 class NewDrinkItem(Resource):
     """

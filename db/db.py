@@ -32,18 +32,19 @@ TIME = "time"
 NUM_OF_PEOPLE = "numOfPeople"
 
 FOOD_NAME = "foodName"
-FOOD_TYPE = "foodType"
 DRINK_NAME = "drinkName"
 PRICE = "price"
 TYPE = "type"
 PRICE = "price"
 
+FOOD_TYPE = 'foodType'
 DRINK_TYPE = 'drinkType'
 
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
 DRINKTYPE = ["Alcoholic", "Non alcoholic", "Juice"]
+FOODTYPE = ["Appetizer", "Entree", "Dessert"]
 
 dbc.client = dbc.get_client()
 if dbc.client is None:
@@ -196,7 +197,7 @@ def food_item_exists(foodName):
     return rec is not None
 
 
-def add_food_item(foodName, foodType):
+def add_food_item(foodName, food_type):
     """
     Add a food item to the food_menu db
     """
@@ -206,7 +207,7 @@ def add_food_item(foodName, foodType):
         dbc.insert_doc(FOOD_MENU,
                        {
                             FOOD_NAME: foodName,
-                            TYPE: foodType
+                            TYPE: food_type
                        })
         return OK
 
@@ -245,9 +246,26 @@ def update_food_item(foodName, new_foodName, new_foodType):
 
 def get_food_menu():
     """
-    Function to return the food menu within the mongo database
+    Function to return the food menu stored in data base
     """
-    return dbc.fetch_all_id(FOOD_MENU)
+    food_menu = {}
+    food_types = get_food_type()
+    for value in food_types.values():
+        food_menu[value["typeName"]] = dbc.fetch_all(
+            FOOD_MENU,
+            FOOD_NAME,
+            {
+                    TYPE: value["typeName"]
+            }
+        )
+    return food_menu
+
+
+def get_food_type():
+    """
+    Function to return food type stored in database
+    """
+    return dbc.fetch_all_id(FOOD_TYPE)
 
 
 def drink_item_exists(drinkName):
