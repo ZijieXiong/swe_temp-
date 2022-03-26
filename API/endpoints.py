@@ -124,7 +124,7 @@ class UpdateReserve(Resource):
             return "Reservation updated"
 
 
-@api.route('/register/<userName>&<password>&<int:type>')
+@api.route('/user/register/<userName>&<password>&<int:type>')
 class RegisterUser(Resource):
     """
     This class create a new record of a user
@@ -142,7 +142,7 @@ class RegisterUser(Resource):
             return "new user added"
 
 
-@api.route('/register/<userName>')
+@api.route('/user/delete/<userName>')
 class DeleteUser(Resource):
     """
     This class deletes an existing record of a specific user
@@ -181,7 +181,7 @@ class LogIn(Resource):
         return 0
 
 
-@api.route('/food_menu/new/<foodName>&<foodType>')
+@api.route('/food_menu/new/<foodName>&<foodType>&<int:price>')
 class NewFoodItem(Resource):
     """
     This class creates a new food item for the menu
@@ -189,11 +189,11 @@ class NewFoodItem(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, foodName, foodType):
+    def post(self, foodName, foodType, price):
         """
         This method adds a new food item the food_menu db
         """
-        ret = db.add_food_item(foodName, foodType)
+        ret = db.add_food_item(foodName, foodType, price)
         if ret == db.DUPLICATE:
             raise(wz.NotAcceptable("Food Item already exists."))
         else:

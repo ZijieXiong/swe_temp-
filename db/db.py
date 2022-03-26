@@ -197,7 +197,7 @@ def food_item_exists(foodName):
     return rec is not None
 
 
-def add_food_item(foodName, food_type):
+def add_food_item(foodName, food_type, price):
     """
     Add a food item to the food_menu db
     """
@@ -207,7 +207,8 @@ def add_food_item(foodName, food_type):
         dbc.insert_doc(FOOD_MENU,
                        {
                             FOOD_NAME: foodName,
-                            TYPE: food_type
+                            TYPE: food_type,
+                            PRICE: price
                        })
         return OK
 
