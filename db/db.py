@@ -3,6 +3,7 @@ This file will manage interactions with our data store.
 At first, it will just contain stubs that return fake data.
 Gradually, we will fill in actual calls to our datastore.
 """
+from http.client import NOT_ACCEPTABLE
 import json
 import os
 
@@ -22,6 +23,7 @@ FOOD_MENU = "foodMenu"
 ROOMS = "rooms"
 DRINK_MENU = "drinkMenu"
 RESERVE = "reservation"
+ORDERS = "orders"
 
 USER_NAME = "userName"
 PASSWORD = "password"
@@ -35,16 +37,19 @@ FOOD_NAME = "foodName"
 DRINK_NAME = "drinkName"
 PRICE = "price"
 TYPE = "type"
-PRICE = "price"
 
 FOOD_TYPE = 'foodType'
 DRINK_TYPE = 'drinkType'
 
+ITEMS = "items"
+FOOD = "food"
+DRINKS = "drinks"
+QUANTITY = "quantity"
+COST = "cost"
+
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
-DRINKTYPE = ["Alcoholic", "Non alcoholic", "Juice"]
-FOODTYPE = ["Appetizer", "Entree", "Dessert"]
 
 dbc.client = dbc.get_client()
 if dbc.client is None:
@@ -197,6 +202,16 @@ def food_item_exists(foodName):
     return rec is not None
 
 
+def get_one_food_item(foodName):
+    """
+    Get a specific food item in db
+    """
+    rec = dbc.fetch_one(
+        FOOD_MENU,
+        filters={FOOD_NAME: foodName})
+    return rec
+
+
 def add_food_item(foodName, food_type, price):
     """
     Add a food item to the food_menu db
@@ -278,6 +293,15 @@ def drink_item_exists(drinkName):
     return rec is not None
 
 
+def get_one_drink_item(drinkName):
+    """
+    A function to return a specific drink item in db based on drinkName.
+    """
+    rec = dbc.fetch_one(DRINK_MENU,
+                        filters={DRINK_NAME: drinkName})
+    return rec
+
+
 def add_drink_item(drinkName, drink_type, price):
     """
     A function that attempts to add a drink item to the drink db
@@ -353,3 +377,47 @@ def get_drink_type():
     A function to return drink type stored in data base
     """
     return dbc.fetch_all_id(DRINK_TYPE)
+
+
+def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
+    """
+    A function to add a new order into the order db.
+    """
+    items = {}
+    cost = 0
+    if(len(foodName) != len(foodQuanti) or len(drinkName) != len(drinkQuanti)):
+        return NOT_ACCEPTABLE
+    food = {}
+    drinks = {}
+    for i in range(len(foodName)):
+        if(food_item_exists(foodName[i])):
+            food_item = get_one_food_item(foodName[i])
+            food[foodName[i]] = {
+                FOOD_NAME: foodName[i],
+                QUANTITY: foodQuanti[i],
+                COST: food_item[PRICE]*foodQuanti[i]
+                }
+            cost += food_item[PRICE]*foodQuanti[i]
+        else:
+            return NOT_FOUND
+    for i in range(len(drinkName)):
+        if(drink_item_exists(drinkName[i])):
+            drink_item = get_one_drink_item(drinkName[i])
+            drinks[drinkName[i]] = {
+                DRINK_NAME: drinkName[i],
+                QUANTITY: drinkQuanti[i],
+                COST: drink_item[PRICE]*drinkQuanti[i]
+                }
+            cost += drink_item[PRICE]*drinkQuanti[i]
+        else:
+            return NOT_FOUND
+    items[FOOD] = food
+    items[DRINKS] = drinks
+    dbc.insert_doc(
+            ORDERS,
+            {
+                USER_NAME: userName,
+                ITEMS: items,
+                COST: cost
+            })
+    return OK

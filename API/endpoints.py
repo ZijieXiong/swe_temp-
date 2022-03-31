@@ -348,6 +348,42 @@ class ListDrinkMenu(Resource):
         return db.get_drink_menu()
 
 
+order_parser = reqparse.RequestParser()
+order_parser.add_argument('foodName', action='split')
+order_parser.add_argument('drinkName', action='split')
+order_parser.add_argument('foodQuanti', type=int, action='split')
+order_parser.add_argument('drinkQuanti', type=int, action='split')
+
+
+@api.route('/order/new/<userName>')
+class NewOrder(Resource):
+    """
+    This class adds a new order to the database.
+    """
+    @api.doc(parser=order_parser)
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'Incorrect items input')
+    def post(self, userName):
+        """
+        This method adds a new order to the order db.
+        """
+        args = order_parser.parse_args()
+        foodName = args["foodName"]
+        drinkName = args["drinkName"]
+        foodQuanti = args['foodQuanti']
+        drinkQuanti = args['drinkQuanti']
+        ret = db.add_order(
+            userName, foodName, drinkName, foodQuanti, drinkQuanti)
+        if ret == db.NOT_FOUND:
+            raise(wz.NotAcceptable("Items not exist"))
+        if ret == db.NOT_ACCEPTABLE:
+            raise(wz.NotAcceptable(
+                'Incorrect length between names and quantities.'))
+        else:
+            return "order added"
+
+
 @api.route('/drink_menu/type')
 class ListDrinkType(Resource):
     """
