@@ -392,7 +392,7 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
     cost = 0
     global ORDER_NUM
     ORDER_NUM = ORDER_NUM + 1
-    order_number = ORDER_NUM
+    orderNumber = ORDER_NUM
     if(len(foodName) != len(foodQuanti) or len(drinkName) != len(drinkQuanti)):
         return NOT_ACCEPTABLE
     food = {}
@@ -428,15 +428,36 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
                 USER_NAME: userName,
                 ITEMS: items,
                 COST: cost,
-                ORDER_NUMBER: order_number
+                ORDER_NUMBER: orderNumber
             })
     return OK
 
 
-def get_order(order_number):
+def order_exists(orderNumber):
+    """
+    Check if an order exists via order number
+    """
+    rec = dbc.fetch_one(ORDERS,
+                        filters={ORDER_NUMBER: orderNumber})
+    return rec is not None
+
+
+def get_order(orderNumber):
     """
     A function to return a specific order/details of an order
     """
     rec = dbc.fetch_one(ORDERS,
-                        filters={ORDER_NUMBER: order_number})
+                        filters={ORDER_NUMBER: orderNumber})
     return rec
+
+
+def delete_order(orderNumber):
+    """
+    Attempts to delete a specific order from order db
+    """
+    if order_exists(orderNumber):
+        dbc.del_one(ORDERS,
+                    {ORDER_NUMBER: orderNumber})
+        return OK
+    else:
+        return NOT_FOUND
