@@ -44,6 +44,7 @@ DRINK_TYPE = 'drinkType'
 ITEMS = "items"
 FOOD = "food"
 DRINKS = "drinks"
+POPULARITY = "popularity"
 QUANTITY = "quantity"
 COST = "cost"
 
@@ -216,6 +217,7 @@ def add_food_item(foodName, food_type, price):
     """
     Add a food item to the food_menu db
     """
+    popularity = 0
     if food_item_exists(foodName):
         return DUPLICATE
     else:
@@ -223,7 +225,8 @@ def add_food_item(foodName, food_type, price):
                        {
                             FOOD_NAME: foodName,
                             TYPE: food_type,
-                            PRICE: price
+                            PRICE: price,
+                            POPULARITY: popularity
                        })
         return OK
 
@@ -392,9 +395,11 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
     for i in range(len(foodName)):
         if(food_item_exists(foodName[i])):
             food_item = get_one_food_item(foodName[i])
+            totalCount = food_item["popularity"]+1
             food[foodName[i]] = {
                 FOOD_NAME: foodName[i],
                 QUANTITY: foodQuanti[i],
+                POPULARITY: totalCount,
                 COST: food_item[PRICE]*foodQuanti[i]
                 }
             cost += food_item[PRICE]*foodQuanti[i]
