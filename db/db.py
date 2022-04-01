@@ -47,6 +47,8 @@ DRINKS = "drinks"
 POPULARITY = "popularity"
 QUANTITY = "quantity"
 COST = "cost"
+ORDER_NUMBER = "orderNumber"
+ORDER_NUM = 0
 
 OK = 0
 NOT_FOUND = 1
@@ -388,6 +390,9 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
     """
     items = {}
     cost = 0
+    global ORDER_NUM
+    ORDER_NUM = ORDER_NUM + 1
+    order_number = ORDER_NUM
     if(len(foodName) != len(foodQuanti) or len(drinkName) != len(drinkQuanti)):
         return NOT_ACCEPTABLE
     food = {}
@@ -395,11 +400,10 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
     for i in range(len(foodName)):
         if(food_item_exists(foodName[i])):
             food_item = get_one_food_item(foodName[i])
-            totalCount = food_item["popularity"]+1
+            food_item["popularity"] += 1
             food[foodName[i]] = {
                 FOOD_NAME: foodName[i],
                 QUANTITY: foodQuanti[i],
-                POPULARITY: totalCount,
                 COST: food_item[PRICE]*foodQuanti[i]
                 }
             cost += food_item[PRICE]*foodQuanti[i]
@@ -423,6 +427,7 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
             {
                 USER_NAME: userName,
                 ITEMS: items,
-                COST: cost
+                COST: cost,
+                ORDER_NUMBER: order_number
             })
     return OK
