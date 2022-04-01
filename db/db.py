@@ -245,7 +245,7 @@ def delete_food_item(foodName):
         return NOT_FOUND
 
 
-def update_food_item(foodName, new_foodName, new_foodType):
+def update_food_item(foodName, new_foodName, new_foodType, new_pop=-1):
     """
     Change the name of a food item in food_menu db
     """
@@ -255,6 +255,8 @@ def update_food_item(foodName, new_foodName, new_foodType):
             new_data[FOOD_NAME] = new_foodName
         if(new_foodType is not None):
             new_data[TYPE] = new_foodType
+        if(new_pop != -1):
+            new_data[POPULARITY] = new_pop
         dbc.update_one(
             FOOD_MENU,
             {FOOD_NAME: foodName},
@@ -336,7 +338,7 @@ def delete_drink_item(drinkName):
 
 
 def update_drink_item(
-        drinkName, new_drinkName, new_drinkType, new_price):
+        drinkName, new_drinkName, new_drinkType, new_price, new_pop=-1):
     """
     Change the name of a food item in food_menu db
     """
@@ -348,6 +350,8 @@ def update_drink_item(
             new_data[TYPE] = new_drinkType
         if(new_price is not None):
             new_data[PRICE] = new_price
+        if(new_pop != -1):
+            new_data[POPULARITY] = new_pop
         dbc.update_one(
             DRINK_MENU,
             {DRINK_NAME: drinkName},
@@ -389,37 +393,42 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
     A function to add a new order into the order db.
     """
     items = {}
+    food = {}
+    drinks = {}
     cost = 0
     global ORDER_NUM
     ORDER_NUM = ORDER_NUM + 1
     orderNumber = ORDER_NUM
-    if(len(foodName) != len(foodQuanti) or len(drinkName) != len(drinkQuanti)):
-        return NOT_ACCEPTABLE
-    food = {}
-    drinks = {}
-    for i in range(len(foodName)):
-        if(food_item_exists(foodName[i])):
-            food_item = get_one_food_item(foodName[i])
-            food_item["popularity"] += 1
-            food[foodName[i]] = {
-                FOOD_NAME: foodName[i],
-                QUANTITY: foodQuanti[i],
-                COST: food_item[PRICE]*foodQuanti[i]
-                }
-            cost += food_item[PRICE]*foodQuanti[i]
-        else:
-            return NOT_FOUND
-    for i in range(len(drinkName)):
-        if(drink_item_exists(drinkName[i])):
-            drink_item = get_one_drink_item(drinkName[i])
-            drinks[drinkName[i]] = {
-                DRINK_NAME: drinkName[i],
-                QUANTITY: drinkQuanti[i],
-                COST: drink_item[PRICE]*drinkQuanti[i]
-                }
-            cost += drink_item[PRICE]*drinkQuanti[i]
-        else:
-            return NOT_FOUND
+    if(foodName is not None or foodQuanti is not None):
+        if(len(foodName) != len(foodQuanti)):
+            return NOT_ACCEPTABLE
+        for i in range(len(foodName)):
+            if(food_item_exists(foodName[i])):
+                food_item = get_one_food_item(foodName[i])
+                update_food_item(
+                    foodName[i], None, None, food_item[POPULARITY]+1)
+                food[foodName[i]] = {
+                    FOOD_NAME: foodName[i],
+                    QUANTITY: foodQuanti[i],
+                    COST: food_item[PRICE]*foodQuanti[i]
+                    }
+                cost += food_item[PRICE]*foodQuanti[i]
+            else:
+                return NOT_FOUND
+    if(drinkName is not None or drinkQuanti is not None):
+        if(len(drinkName) != len(drinkQuanti)):
+            return NOT_ACCEPTABLE
+        for i in range(len(drinkName)):
+            if(drink_item_exists(drinkName[i])):
+                drink_item = get_one_drink_item(drinkName[i])
+                drinks[drinkName[i]] = {
+                    DRINK_NAME: drinkName[i],
+                    QUANTITY: drinkQuanti[i],
+                    COST: drink_item[PRICE]*drinkQuanti[i]
+                    }
+                cost += drink_item[PRICE]*drinkQuanti[i]
+            else:
+                return NOT_FOUND
     items[FOOD] = food
     items[DRINKS] = drinks
     dbc.insert_doc(

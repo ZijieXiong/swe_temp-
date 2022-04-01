@@ -213,3 +213,4 @@ class EndpointTestCase(TestCase):
         ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"], 1)
         dfi = ep.DeleteFoodItem(Resource)
         self.assertIsInstance(ret, str)
+    
