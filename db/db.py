@@ -431,3 +431,12 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
                 ORDER_NUMBER: order_number
             })
     return OK
+
+
+def get_order(order_number):
+    """
+    A function to return a specific order/details of an order
+    """
+    rec = dbc.fetch_one(ORDERS,
+                        filters={ORDER_NUMBER: order_number})
+    return rec
