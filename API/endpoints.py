@@ -384,6 +384,18 @@ class NewOrder(Resource):
             return "order added"
 
 
+@api.route('/order/list')
+class ListOrder(Resource):
+    """
+    This class returns a dictionary of all orders
+    """
+    def get(self):
+        """
+        This method fetch the orders from the order db.
+        """
+        return db.get_order_list()
+
+
 @api.route('/drink_menu/type')
 class ListDrinkType(Resource):
     """

@@ -442,6 +442,10 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
     return OK
 
 
+def get_order_list():
+    return dbc.fetch_all_id(ORDERS)
+
+
 def order_exists(orderNumber):
     """
     Check if an order exists via order number
