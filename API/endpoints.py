@@ -189,11 +189,11 @@ class NewFoodItem(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, foodName, foodType, price):
+    def post(self, foodName, foodType, price, description):
         """
         This method adds a new food item the food_menu db
         """
-        ret = db.add_food_item(foodName, foodType, price)
+        ret = db.add_food_item(foodName, foodType, price, description)
         if ret == db.DUPLICATE:
             raise(wz.NotAcceptable("Food Item already exists."))
         else:
@@ -221,6 +221,7 @@ class DeleteFoodItem(Resource):
 food_parser = reqparse.RequestParser()
 food_parser.add_argument('new_foodName', type=str, help='new_foodName')
 food_parser.add_argument('new_foodType', type=str, help='new_foodType')
+food_parser.add_argument('new_description', type=str, help='new_description')
 
 
 @api.route('/food_menu/update/<foodName>')
@@ -238,7 +239,9 @@ class UpdateFoodItem(Resource):
         args = drink_parser.parse_args()
         new_foodName = args['new_foodName']
         new_foodType = args['new_foodType']
-        ret = db.update_food_item(foodName, new_foodName, new_foodType)
+        new_description = args['new_description']
+        ret = db.update_food_item(
+            foodName, new_foodName, new_foodType, new_description)
         if ret == db.NOT_FOUND:
             raise(wz.NotAcceptable("Item could not be found."))
         else:

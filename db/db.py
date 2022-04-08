@@ -44,6 +44,7 @@ DRINK_TYPE = 'drinkType'
 ITEMS = "items"
 FOOD = "food"
 DRINKS = "drinks"
+DESCRIPTION = "description"
 POPULARITY = "popularity"
 QUANTITY = "quantity"
 COST = "cost"
@@ -215,7 +216,7 @@ def get_one_food_item(foodName):
     return rec
 
 
-def add_food_item(foodName, food_type, price):
+def add_food_item(foodName, food_type, price, description):
     """
     Add a food item to the food_menu db
     """
@@ -228,6 +229,7 @@ def add_food_item(foodName, food_type, price):
                             FOOD_NAME: foodName,
                             TYPE: food_type,
                             PRICE: price,
+                            DESCRIPTION: description,
                             POPULARITY: popularity
                        })
         return OK
@@ -245,7 +247,8 @@ def delete_food_item(foodName):
         return NOT_FOUND
 
 
-def update_food_item(foodName, new_foodName, new_foodType, new_pop=-1):
+def update_food_item(
+        foodName, new_foodName, new_foodType, new_description, new_pop=-1):
     """
     Change the name of a food item in food_menu db
     """
@@ -255,6 +258,8 @@ def update_food_item(foodName, new_foodName, new_foodType, new_pop=-1):
             new_data[FOOD_NAME] = new_foodName
         if(new_foodType is not None):
             new_data[TYPE] = new_foodType
+        if(new_description is not None):
+            new_data[DESCRIPTION] = new_description
         if(new_pop != -1):
             new_data[POPULARITY] = new_pop
         dbc.update_one(

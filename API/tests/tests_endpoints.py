@@ -200,7 +200,7 @@ class EndpointTestCase(TestCase):
         fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
         foodType = db.get_food_type()
-        ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"], 1)
+        ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"], 1, "Placeholder text")
         self.assertTrue(db.food_item_exists(new_food_item))
     
     def test_delete_food_item(self):
@@ -210,7 +210,7 @@ class EndpointTestCase(TestCase):
         fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
         foodType = db.get_food_type()
-        ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"], 1)
+        ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"], 1, "Delicious thing")
         dfi = ep.DeleteFoodItem(Resource)
         self.assertIsInstance(ret, str)
     
