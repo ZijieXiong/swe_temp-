@@ -221,6 +221,7 @@ class DeleteFoodItem(Resource):
 food_parser = reqparse.RequestParser()
 food_parser.add_argument('new_foodName', type=str, help='new_foodName')
 food_parser.add_argument('new_foodType', type=str, help='new_foodType')
+food_parser.add_argument('new_price', type=int, help='new_price')
 food_parser.add_argument('new_description', type=str, help='new_description')
 
 
@@ -239,9 +240,10 @@ class UpdateFoodItem(Resource):
         args = drink_parser.parse_args()
         new_foodName = args['new_foodName']
         new_foodType = args['new_foodType']
+        new_price = args['new_price']
         new_description = args['new_description']
         ret = db.update_food_item(
-            foodName, new_foodName, new_foodType, new_description)
+            foodName, new_foodName, new_foodType, new_price, new_description)
         if ret == db.NOT_FOUND:
             raise(wz.NotAcceptable("Item could not be found."))
         else:

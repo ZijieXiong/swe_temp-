@@ -220,10 +220,10 @@ def add_food_item(foodName, food_type, price, description):
     """
     Add a food item to the food_menu db
     """
-    popularity = 0
     if food_item_exists(foodName):
         return DUPLICATE
     else:
+        popularity = 0
         dbc.insert_doc(FOOD_MENU,
                        {
                             FOOD_NAME: foodName,
@@ -247,8 +247,8 @@ def delete_food_item(foodName):
         return NOT_FOUND
 
 
-def update_food_item(
-        foodName, new_foodName, new_foodType, new_description, new_pop=-1):
+def update_food_item(foodName, new_foodName, new_foodType,
+                     new_price, new_description, new_pop=-1):
     """
     Change the name of a food item in food_menu db
     """
@@ -258,6 +258,8 @@ def update_food_item(
             new_data[FOOD_NAME] = new_foodName
         if(new_foodType is not None):
             new_data[TYPE] = new_foodType
+        if(new_price is not None):
+            new_data[PRICE] = new_price
         if(new_description is not None):
             new_data[DESCRIPTION] = new_description
         if(new_pop != -1):
@@ -321,12 +323,14 @@ def add_drink_item(drinkName, drink_type, price, description):
     if drink_item_exists(drinkName):
         return DUPLICATE
     else:
+        popularity = 0
         dbc.insert_doc(DRINK_MENU,
                        {
                            DRINK_NAME: drinkName,
                            TYPE: drink_type,
                            PRICE: price,
-                           DESCRIPTION: description
+                           DESCRIPTION: description,
+                           POPULARITY: popularity
                        })
         return OK
 
