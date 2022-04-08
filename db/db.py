@@ -469,6 +469,14 @@ def get_order(orderNumber):
     return rec
 
 
+def get_order_by_user(userName):
+    """
+    A function to return the oders of a specifc user.
+    """
+    rec = dbc.fetch_all_id(ORDERS, filters={USER_NAME: userName})
+    return rec
+
+
 def delete_order(orderNumber):
     """
     Attempts to delete a specific order from order db

@@ -399,6 +399,18 @@ class ListOrder(Resource):
         return db.get_order_list()
 
 
+@api.route('/order/user/<userName>')
+class ListOrderByUser(Resource):
+    """
+    This class returns a dictionary of all orders by a specifc user
+    """
+    def post(self, userName):
+        """
+        This method fetch the orders by a specifc from the order db.
+        """
+        return db.get_order_by_user(userName)
+
+
 @api.route('/drink_menu/type')
 class ListDrinkType(Resource):
     """
