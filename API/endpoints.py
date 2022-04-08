@@ -280,11 +280,11 @@ class NewDrinkItem(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, drinkName, drinkType, price):
+    def post(self, drinkName, drinkType, price, description):
         """
         This method adds a new drink item to the drink_menu db
         """
-        ret = db.add_drink_item(drinkName, drinkType, price)
+        ret = db.add_drink_item(drinkName, drinkType, price, description)
         if ret == db.DUPLICATE:
             raise(wz.NotAcceptable("Drink Item already exists."))
         else:
@@ -313,6 +313,7 @@ drink_parser = reqparse.RequestParser()
 drink_parser.add_argument('new_drinkName', type=str, help='new_drinkName')
 drink_parser.add_argument('new_drinkType', type=str, help='new_drinkType')
 drink_parser.add_argument('new_price', type=int, help='new_price')
+drink_parser.add_argument('new_description', type=str, help='new_description')
 
 
 @api.route('/drink_menu/update/<drinkName>')
@@ -331,8 +332,9 @@ class UpdateDrinkItem(Resource):
         new_drinkName = args['new_drinkName']
         new_drinkType = args['new_drinkType']
         new_price = args['new_price']
-        ret = db.update_drink_item(
-            drinkName, new_drinkName, new_drinkType, new_price)
+        new_description = args['new_description']
+        ret = db.update_drink_item(drinkName, new_drinkName,
+                                   new_drinkType, new_price, new_description)
         if ret == db.NOT_FOUND:
             raise(wz.notAcceptable("Item could not be found"))
         else:

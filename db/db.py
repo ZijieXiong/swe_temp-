@@ -314,7 +314,7 @@ def get_one_drink_item(drinkName):
     return rec
 
 
-def add_drink_item(drinkName, drink_type, price):
+def add_drink_item(drinkName, drink_type, price, description):
     """
     A function that attempts to add a drink item to the drink db
     """
@@ -325,7 +325,8 @@ def add_drink_item(drinkName, drink_type, price):
                        {
                            DRINK_NAME: drinkName,
                            TYPE: drink_type,
-                           PRICE: price
+                           PRICE: price,
+                           DESCRIPTION: description
                        })
         return OK
 
@@ -342,8 +343,8 @@ def delete_drink_item(drinkName):
         return NOT_FOUND
 
 
-def update_drink_item(
-        drinkName, new_drinkName, new_drinkType, new_price, new_pop=-1):
+def update_drink_item(drinkName, new_drinkName, new_drinkType,
+                      new_price, new_description, new_pop=-1):
     """
     Change the name of a food item in food_menu db
     """
@@ -355,6 +356,8 @@ def update_drink_item(
             new_data[TYPE] = new_drinkType
         if(new_price is not None):
             new_data[PRICE] = new_price
+        if(new_description is not None):
+            new_data[DESCRIPTION] = new_description
         if(new_pop != -1):
             new_data[POPULARITY] = new_pop
         dbc.update_one(

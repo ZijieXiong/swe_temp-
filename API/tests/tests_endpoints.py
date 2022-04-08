@@ -113,7 +113,7 @@ class EndpointTestCase(TestCase):
         di = ep.NewDrinkItem(Resource)
         new_drink_item = new_entity_name("drink_name")
         drinkType = db.get_drink_type()
-        ret = di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1)
+        ret = di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1, 'Placeholder text')
         self.assertTrue(db.drink_item_exists(new_drink_item))
 
     def test_delete_drink_item(self):
@@ -123,7 +123,7 @@ class EndpointTestCase(TestCase):
         di = ep.NewDrinkItem(Resource)
         new_drink_item = new_entity_name("drink_name")
         drinkType = db.get_drink_type()
-        di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1)
+        di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1, 'Delicious drink')
         ddi = ep.DeleteDrinkItem(Resource)
         ret = ddi.post(new_drink_item)
         self.assertIsInstance(ret, str)
