@@ -48,6 +48,7 @@ DESCRIPTION = "description"
 POPULARITY = "popularity"
 QUANTITY = "quantity"
 COST = "cost"
+ORDER_TYPE = "orderType"
 ORDER_NUMBER = "orderNumber"
 ORDER_NUM = 0
 
@@ -400,7 +401,8 @@ def get_drink_type():
     return dbc.fetch_all_id(DRINK_TYPE)
 
 
-def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
+def add_order(userName, foodName, drinkName,
+              foodQuanti, drinkQuanti, orderType):
     """
     A function to add a new order into the order db.
     """
@@ -449,6 +451,7 @@ def add_order(userName, foodName, drinkName, foodQuanti, drinkQuanti):
                 USER_NAME: userName,
                 ITEMS: items,
                 COST: cost,
+                ORDER_TYPE: orderType,
                 ORDER_NUMBER: orderNumber
             })
     return OK
