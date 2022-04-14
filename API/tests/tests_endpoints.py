@@ -213,4 +213,13 @@ class EndpointTestCase(TestCase):
         ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"], 1, "Delicious thing")
         dfi = ep.DeleteFoodItem(Resource)
         self.assertIsInstance(ret, str)
+
+    def test_add_review(self):
+        """
+        Test if we can add a review
+        """
+        rv = ep.NewReview(Resource)
+        new_review = new_entity_name("review")
+        ret = rv.post(new_review)
+        self.assertIsInstance(ret, str)
     

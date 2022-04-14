@@ -427,14 +427,26 @@ class ListDrinkType(Resource):
         return db.get_drink_type()
 
 
-@api.route('/feedback_list/<feedback>')
-class NewFeedBack(Resource):
+@api.route('/revuew_list/<review>')
+class NewReview(Resource):
     """
     This class adds a new feedback string to feedback db
     """
-    def post(self, feedback):
+    def post(self, review):
         """
         This method adds the feedback to the feedback db
         """
-        db.add_feedback(feedback)
-        return "feedback added"
+        db.add_review(review)
+        return "review added"
+
+
+@api.route('/review_list/review')
+class ListReviews(Resource):
+    """
+    This class lists every review
+    """
+    def post(self):
+        """
+        This method lists every review
+        """
+        return db.get_review_list()

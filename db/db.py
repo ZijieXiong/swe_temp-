@@ -52,8 +52,8 @@ ORDER_TYPE = "orderType"
 ORDER_NUMBER = "orderNumber"
 ORDER_NUM = 0
 
-FEEDBACK_LIST = "feedbackList"
-FEEDBACK = "feedback"
+REVIEW_LIST = "reviewList"
+REVIEW = "review"
 
 OK = 0
 NOT_FOUND = 1
@@ -502,12 +502,19 @@ def delete_order(orderNumber):
         return NOT_FOUND
 
 
-def add_feedback(feedback):
+def add_review(review):
     """
     This function attempts to add a string to feedback db
     """
-    dbc.insert_doc(FEEDBACK_LIST,
+    dbc.insert_doc(REVIEW_LIST,
                    {
-                       FEEDBACK: feedback
+                       REVIEW: review
                    })
     return OK
+
+
+def get_review_list():
+    """
+    This function lists every review
+    """
+    return dbc.fetch_all_id(REVIEW_LIST)
