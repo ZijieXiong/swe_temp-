@@ -360,10 +360,9 @@ order_parser.add_argument('foodName', action='split')
 order_parser.add_argument('drinkName', action='split')
 order_parser.add_argument('foodQuanti', type=int, action='split')
 order_parser.add_argument('drinkQuanti', type=int, action='split')
-order_parser.add_argument('orderType', type=str, help='orderType')
 
 
-@api.route('/order/new/<userName>')
+@api.route('/order/new/<userName>&<orderType>')
 class NewOrder(Resource):
     """
     This class adds a new order to the database.
