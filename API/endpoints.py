@@ -425,3 +425,16 @@ class ListDrinkType(Resource):
         This method returns the drink types
         """
         return db.get_drink_type()
+
+
+@api.route('/feedback_list/<feedback>')
+class NewFeedBack(Resource):
+    """
+    This class adds a new feedback string to feedback db
+    """
+    def post(self, feedback):
+        """
+        This method adds the feedback to the feedback db
+        """
+        db.add_feedback(feedback)
+        return "feedback added"

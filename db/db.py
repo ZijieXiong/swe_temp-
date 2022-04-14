@@ -52,6 +52,9 @@ ORDER_TYPE = "orderType"
 ORDER_NUMBER = "orderNumber"
 ORDER_NUM = 0
 
+FEEDBACK_LIST = "feedbackList"
+FEEDBACK = "feedback"
+
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
@@ -497,3 +500,14 @@ def delete_order(orderNumber):
         return OK
     else:
         return NOT_FOUND
+
+
+def add_feedback(feedback):
+    """
+    This function attempts to add a string to feedback db
+    """
+    dbc.insert_doc(FEEDBACK_LIST,
+                   {
+                       FEEDBACK: feedback
+                   })
+    return OK
