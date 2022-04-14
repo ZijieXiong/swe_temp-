@@ -181,7 +181,7 @@ class LogIn(Resource):
         return 0
 
 
-@api.route('/food_menu/new/<foodName>&<foodType>&<int:price>')
+@api.route('/food_menu/new/<foodName>&<foodType>&<int:price>&<foodDescription>')
 class NewFoodItem(Resource):
     """
     This class creates a new food item for the menu
@@ -274,7 +274,7 @@ class ListFoodType(Resource):
         return db.get_food_type()
 
 
-@api.route('/drink_menu/new/<drinkName>&<drinkType>&<int:price>')
+@api.route('/drink_menu/new/<drinkName>&<drinkType>&<int:price>&<drinkDescription>')
 class NewDrinkItem(Resource):
     """
     This class adds a new drink item to the drink db
