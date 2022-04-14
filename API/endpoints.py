@@ -189,11 +189,11 @@ class NewFoodItem(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, foodName, foodType, price, description):
+    def post(self, foodName, foodType, price, foodDes):
         """
         This method adds a new food item the food_menu db
         """
-        ret = db.add_food_item(foodName, foodType, price, description)
+        ret = db.add_food_item(foodName, foodType, price, foodDes)
         if ret == db.DUPLICATE:
             raise(wz.NotAcceptable("Food Item already exists."))
         else:
@@ -282,11 +282,11 @@ class NewDrinkItem(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
-    def post(self, drinkName, drinkType, price, description):
+    def post(self, drinkName, drinkType, price, drinkDes):
         """
         This method adds a new drink item to the drink_menu db
         """
-        ret = db.add_drink_item(drinkName, drinkType, price, description)
+        ret = db.add_drink_item(drinkName, drinkType, price, drinkDes)
         if ret == db.DUPLICATE:
             raise(wz.NotAcceptable("Drink Item already exists."))
         else:
