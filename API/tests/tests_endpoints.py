@@ -214,6 +214,14 @@ class EndpointTestCase(TestCase):
         dfi = ep.DeleteFoodItem(Resource)
         self.assertIsInstance(ret, str)
 
+    def test_list_order_by_user(self):
+        """
+        Post-condition 1: return value is a dict
+        """
+        lobu = ep.ListOrderByUser()
+        ret = lobu.post("zx811")
+        self.assertIsInstance(ret, dict)
+
     def test_add_review(self):
         """
         Test if we can add a review
@@ -223,3 +231,10 @@ class EndpointTestCase(TestCase):
         ret = rv.post(new_review)
         self.assertIsInstance(ret, str)
     
+    def test_list_review(self):
+        """
+        Post-condition 1: return value is a dict.
+        """
+        lr = ep.ListReviews()
+        ret = lr.get()
+        self.assertIsInstance(ret, dict)

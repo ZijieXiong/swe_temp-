@@ -445,7 +445,7 @@ class ListReviews(Resource):
     """
     This class lists every review
     """
-    def post(self):
+    def get(self):
         """
         This method lists every review
         """
