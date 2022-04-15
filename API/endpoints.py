@@ -274,6 +274,24 @@ class ListFoodType(Resource):
         return db.get_food_type()
 
 
+@api.route('/food_menu/type/add/<typeName>')
+class AddFoodType(Resource):
+    """
+    This class adds a new food type to the foodType db
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, typeName):
+        """
+        This method adds a food type to the db
+        """
+        ret = db.add_food_type(typeName)
+        if ret == db.DUPLICATE:
+            raise(wz.NotAcceptable("Item could not be found."))
+        else:
+            return "food item updated"
+
+
 @api.route('/drink_menu/new/<drinkName>&<drinkType>&<int:price>&<drinkDes>')
 class NewDrinkItem(Resource):
     """

@@ -3,7 +3,6 @@ This file will manage interactions with our data store.
 At first, it will just contain stubs that return fake data.
 Gradually, we will fill in actual calls to our datastore.
 """
-from http.client import NOT_ACCEPTABLE
 import json
 import os
 
@@ -40,6 +39,7 @@ TYPE = "type"
 
 FOOD_TYPE = 'foodType'
 DRINK_TYPE = 'drinkType'
+TYPE_NAME = 'typeName'
 
 ITEMS = "items"
 FOOD = "food"
@@ -58,6 +58,7 @@ REVIEW = "review"
 OK = 0
 NOT_FOUND = 1
 DUPLICATE = 2
+INVALID = 3
 
 dbc.client = dbc.get_client()
 if dbc.client is None:
@@ -302,6 +303,28 @@ def get_food_type():
     return dbc.fetch_all_id(FOOD_TYPE)
 
 
+def food_type_exists(typeName):
+    rec = dbc.fetch_one(
+            FOOD_TYPE,
+            filters={TYPE_NAME: typeName})
+    print(rec)
+    return rec is not None
+
+
+def add_food_type(typeName):
+    """
+    Function to insert a new food type to the db
+    """
+    if food_type_exists(typeName):
+        return DUPLICATE
+    else:
+        dbc.insert_doc(FOOD_TYPE,
+                       {
+                            TYPE_NAME: typeName
+                       })
+        return OK
+
+
 def drink_item_exists(drinkName):
     """
     A function that checks if a drink item exists in the drink menu db
@@ -418,7 +441,7 @@ def add_order(userName, foodName, drinkName,
     orderNumber = ORDER_NUM
     if(foodName is not None or foodQuanti is not None):
         if(len(foodName) != len(foodQuanti)):
-            return NOT_ACCEPTABLE
+            return INVALID
         for i in range(len(foodName)):
             if(food_item_exists(foodName[i])):
                 food_item = get_one_food_item(foodName[i])
@@ -434,7 +457,7 @@ def add_order(userName, foodName, drinkName,
                 return NOT_FOUND
     if(drinkName is not None or drinkQuanti is not None):
         if(len(drinkName) != len(drinkQuanti)):
-            return NOT_ACCEPTABLE
+            return INVALID
         for i in range(len(drinkName)):
             if(drink_item_exists(drinkName[i])):
                 drink_item = get_one_drink_item(drinkName[i])
