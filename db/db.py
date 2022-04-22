@@ -427,6 +427,31 @@ def get_drink_type():
     return dbc.fetch_all_id(DRINK_TYPE)
 
 
+def drink_type_exists(typeName):
+    """
+    Function to check if a drink type already exists in db
+    """
+    rec = dbc.fetch_one(
+            DRINK_TYPE,
+            filters={TYPE_NAME: typeName})
+    print(rec)
+    return rec is not None
+
+
+def add_drink_type(typeName):
+    """
+    Function to insert a new drink type into db
+    """
+    if drink_type_exists(typeName):
+        return DUPLICATE
+    else:
+        dbc.insert_doc(DRINK_TYPE,
+                       {
+                            TYPE_NAME: typeName
+                       })
+        return OK
+
+
 def add_order(userName, foodName, drinkName,
               foodQuanti, drinkQuanti, orderType):
     """

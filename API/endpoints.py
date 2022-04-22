@@ -445,7 +445,25 @@ class ListDrinkType(Resource):
         return db.get_drink_type()
 
 
-@api.route('/revuew_list/<review>')
+@api.route('/drink_menu/type/add/<typeName>')
+class AddDrinkType(Resource):
+    """
+    This class adds a new drink type to drinkType db
+    """
+    @api.response(HTTPStatus.OK, 'Success')
+    @api.response(HTTPStatus.NOT_ACCEPTABLE, 'A duplicate key')
+    def post(self, typeName):
+        """
+        This methods adds a drink type to the db
+        """
+        ret = db.add_drink_type(typeName)
+        if ret == db.DUPLICATE:
+            raise(wz.NotAcceptable("Item could not be found."))
+        else:
+            return "food item updated"
+
+
+@api.route('/review_list/<review>')
 class NewReview(Resource):
     """
     This class adds a new feedback string to feedback db
