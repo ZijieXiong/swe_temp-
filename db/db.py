@@ -420,6 +420,14 @@ def get_drink_menu():
     return drink_menu
 
 
+def get_drink_by_type(typeName):
+    """
+    A function to return a list of drinks of a certain type
+    """
+    rec = dbc.fetch_all_id(DRINK_MENU, filters={DRINK_TYPE: typeName})
+    return rec
+
+
 def get_drink_type():
     """
     A function to return drink type stored in data base

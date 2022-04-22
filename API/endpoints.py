@@ -433,6 +433,18 @@ class ListOrderByUser(Resource):
         return db.get_order_by_user(userName)
 
 
+@api.route('/drink_menu/type/<typeName>')
+class ListDrinkByType(Resource):
+    """
+    This class returns a dictionary of all drinks of a specific type
+    """
+    def post(self, typeName):
+        """
+        This method fetch all drinks of a specific type from db
+        """
+        return db.get_drink_by_type(typeName)
+
+
 @api.route('/drink_menu/type')
 class ListDrinkType(Resource):
     """
