@@ -8,9 +8,12 @@ from unittest import TestCase, skip
 from flask_restx import Resource, Api
 import API.endpoints as ep
 import db.db as db
+from db.db_connect import client, db_nm
 import random
 
 HUGE_NUM = 100000000000
+KNOWN_USER_NM = "Known user"
+KNOWN_USER_PW = "123456"
 
 def new_entity_name(entity_type):
     int_name = random.randint(0, HUGE_NUM)
@@ -18,7 +21,7 @@ def new_entity_name(entity_type):
 
 class EndpointTestCase(TestCase):
     def setUp(self):
-        pass;
+        client[db_nm][db.USER].insert_one({db.USER_NAME: "zx811", db.PASSWORD: KNOWN_USER_PW})
 
     def tearDown(self):
         pass;
@@ -166,6 +169,23 @@ class EndpointTestCase(TestCase):
         ret = dr.post(new_reserve, "2021-12-19 00:35:33.134848")
         self.assertIsInstance(ret, str)
         
+    def test_food_type(self):
+        """
+        Post-condition 1: returned value is a dict
+        """
+        dt = ep.ListFoodType(Resource)
+        ret = dt.get()
+        self.assertIsInstance(ret, dict)
+
+    def test_food_type2(self):
+        """
+        Post-condition 2: value in the returned value is dict too
+        """
+        dt = ep.ListFoodType(Resource)
+        ret = dt.get()
+        for val in ret.values():
+            self.assertIsInstance(val, dict)
+
     def test_food_menu1(self):
         """
         Post-condition 1: return is a dictionary
