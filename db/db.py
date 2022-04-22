@@ -296,6 +296,14 @@ def get_food_menu():
     return food_menu
 
 
+def get_food_by_type(typeName):
+    """
+    Function to return food stored in db of a specific type
+    """
+    rec = dbc.fetch_all_id(FOOD_MENU, filters={TYPE: typeName})
+    return rec
+
+
 def get_food_type():
     """
     Function to return food type stored in database
@@ -424,7 +432,7 @@ def get_drink_by_type(typeName):
     """
     A function to return a list of drinks of a certain type
     """
-    rec = dbc.fetch_all_id(DRINK_MENU, filters={DRINK_TYPE: typeName})
+    rec = dbc.fetch_all_id(DRINK_MENU, filters={TYPE: typeName})
     return rec
 
 

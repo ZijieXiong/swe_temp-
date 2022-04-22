@@ -262,6 +262,18 @@ class ListFoodMenu(Resource):
         return db.get_food_menu()
 
 
+@api.route('/food_menu/list/<typeName>')
+class ListFoodByType(Resource):
+    """
+    This class returns a dictionary of all food of specific type
+    """
+    def post(self, typeName):
+        """
+        This method fetch all foods of a specific type from db
+        """
+        return db.get_food_by_type(typeName)
+
+
 @api.route('/food_menu/type')
 class ListFoodType(Resource):
     """
