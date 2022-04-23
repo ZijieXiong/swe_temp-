@@ -46,7 +46,7 @@ class EndpointTestCase(TestCase):
         client[db_nm][db.FOOD_MENU].delete_many({})
         client[db_nm][db.FOOD_TYPE].delete_many({})
         client[db_nm][db.RESERVE].delete_many({})
-        client[db_nm][db.REVIEW].delete_many({})
+        client[db_nm][db.REVIEW_LIST].delete_many({})
 
     def test_log_in1(self):
         """

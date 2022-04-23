@@ -29,7 +29,8 @@ class DBTestCase(TestCase):
             client[db_nm][db.RESERVE].insert_one({db.USER_NAME: KNOWN_USER_NM, db.TIME: KNOWN_RESERV_TIME, db.NUM_OF_PEOPLE: KNOWN_RESERV_NUM})
 
         def tearDown(self):
-            pass;
+            client[db_nm][db.USER].delete_many({})
+            client[db_nm][db.RESERVE].delete_many({})
 
         def test_get_users(self):
             """

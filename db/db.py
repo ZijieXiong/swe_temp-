@@ -23,6 +23,7 @@ ROOMS = "rooms"
 DRINK_MENU = "drinkMenu"
 RESERVE = "reservation"
 ORDERS = "orders"
+REVIEW_LIST = "reviewList"
 
 USER_NAME = "userName"
 PASSWORD = "password"
@@ -52,7 +53,6 @@ ORDER_TYPE = "orderType"
 ORDER_NUMBER = "orderNumber"
 ORDER_NUM = 0
 
-REVIEW_LIST = "reviewList"
 REVIEW = "review"
 
 OK = 0
@@ -193,7 +193,6 @@ def update_reserve(userName, time, new_time="", numOfUsers=-1):
             {USER_NAME: userName, TIME: time},
             {
                 "$set": {TIME: new_time, NUM_OF_PEOPLE: numOfUsers},
-                "$currentDate": {"LastModified": True}
             }
             )
         return OK
