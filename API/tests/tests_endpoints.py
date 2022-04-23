@@ -14,6 +14,17 @@ import random
 HUGE_NUM = 100000000000
 KNOWN_USER_NM = "Known user"
 KNOWN_USER_PW = "123456"
+KNOWN_USER_TYPE = 1
+
+KNOWN_DRINK_NAME = "Corona"
+KNOWN_DRINK_TYPE = "Beer"
+KNOWN_FOOD_NAME = "Fries"
+KNOWN_FOOD_TYPE = "Appetizer"
+KNOWN_DES = "placeholder"
+KNOWN_PRICE = 1
+
+KNOWN_RESERV_TIME = "2021-12-19 00:35:33.134848"
+KNOWN_RESERV_NUM = 1
 
 def new_entity_name(entity_type):
     int_name = random.randint(0, HUGE_NUM)
@@ -21,18 +32,29 @@ def new_entity_name(entity_type):
 
 class EndpointTestCase(TestCase):
     def setUp(self):
-        client[db_nm][db.USER].insert_one({db.USER_NAME: "zx811", db.PASSWORD: KNOWN_USER_PW})
+        client[db_nm][db.USER].insert_one({db.USER_NAME: KNOWN_USER_NM, db.PASSWORD: KNOWN_USER_PW, db.USER_TYPE: KNOWN_USER_TYPE})
+        client[db_nm][db.DRINK_TYPE].insert_one({db.TYPE_NAME: KNOWN_DRINK_TYPE})
+        client[db_nm][db.DRINK_MENU].insert_one({db.DRINK_NAME: KNOWN_DRINK_NAME, db.TYPE: KNOWN_DRINK_TYPE, db.PRICE: KNOWN_PRICE, db.DESCRIPTION: KNOWN_DES, db.POPULARITY: 0})
+        client[db_nm][db.FOOD_TYPE].insert_one({db.TYPE_NAME: KNOWN_FOOD_TYPE})
+        client[db_nm][db.FOOD_MENU].insert_one({db.FOOD_NAME: KNOWN_FOOD_NAME, db.TYPE: KNOWN_FOOD_TYPE, db.PRICE: KNOWN_PRICE, db.DESCRIPTION: KNOWN_DES, db.POPULARITY: 0})
+        client[db_nm][db.RESERVE].insert_one({db.USER_NAME: KNOWN_USER_NM, db.TIME: KNOWN_RESERV_TIME, db.NUM_OF_PEOPLE: KNOWN_RESERV_NUM})
 
     def tearDown(self):
-        pass;
+        client[db_nm][db.USER].delete_many({})
+        client[db_nm][db.DRINK_TYPE].delete_many({})
+        client[db_nm][db.DRINK_MENU].delete_many({})
+        client[db_nm][db.FOOD_MENU].delete_many({})
+        client[db_nm][db.FOOD_TYPE].delete_many({})
+        client[db_nm][db.RESERVE].delete_many({})
+        client[db_nm][db.REVIEW].delete_many({})
 
     def test_log_in1(self):
         """
         Test if we can login with valid account and password
         """
         li = ep.LogIn(Resource)
-        ret = li.post("zx811", "ForzaMilano")
-        self.assertIsInstance(ret, int)
+        ret = li.post(KNOWN_USER_NM, KNOWN_USER_PW)
+        self.assertTrue(ret == 1)
 
     def test_log_in2(self):
         """
@@ -123,12 +145,8 @@ class EndpointTestCase(TestCase):
         """
         Test if we can successfully delete a drink item after adding a drink item
         """
-        di = ep.NewDrinkItem(Resource)
-        new_drink_item = new_entity_name("drink_name")
-        drinkType = db.get_drink_type()
-        di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1, 'Delicious drink')
         ddi = ep.DeleteDrinkItem(Resource)
-        ret = ddi.post(new_drink_item)
+        ret = ddi.post(KNOWN_DRINK_NAME)
         self.assertIsInstance(ret, str)
 
     def test_list_reservation1(self):
@@ -161,12 +179,8 @@ class EndpointTestCase(TestCase):
         """
         Test if we can successfully delete an existed reservation.
         """
-        cr = ep.CreateReserve(Resource)
-        new_reserve = new_entity_name("reserve")
-        time = "2021-12-19 00:35:33.134848"
-        cr.post(new_reserve, "2021-12-19 00:35:33.134848", 1)
         dr = ep.DeleteReserve(Resource)
-        ret = dr.post(new_reserve, "2021-12-19 00:35:33.134848")
+        ret = dr.post(KNOWN_USER_NM, KNOWN_RESERV_TIME)
         self.assertIsInstance(ret, str)
         
     def test_food_type(self):
