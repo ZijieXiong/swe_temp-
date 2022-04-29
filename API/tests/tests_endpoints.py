@@ -131,6 +131,23 @@ class EndpointTestCase(TestCase):
             for val2 in val1.values():
                 self.assertIsInstance(val2, dict)
 
+    def test_list_drink_by_type1(self):
+        """
+        Post-condition 1: return is a dictionary
+        """
+        ldbt = ep.ListDrinkByType(Resource)
+        ret = ldbt.post(KNOWN_DRINK_TYPE)
+        self.assertIsInstance(ret, dict)
+
+    def test_list_dood_by_type2(self):
+        """
+        Post-condition 2: values is the dict are dicts too
+        """
+        ldbt = ep.ListFoodByType(Resource)
+        ret = ldbt.post(KNOWN_DRINK_TYPE)
+        for val in ret.values():
+            self.assertIsInstance(val, dict)
+
     def test_add_drink_item(self):
         """
         Test if we can successfully add/create a new drink item
@@ -227,6 +244,23 @@ class EndpointTestCase(TestCase):
             for val2 in val1.values():
                 self.assertIsInstance(val2, dict)
 
+    def test_list_food_by_type1(self):
+        """
+        Post-condition 1: return is a dictionary
+        """
+        lfbt = ep.ListFoodByType(Resource)
+        ret = lfbt.post(KNOWN_FOOD_TYPE)
+        self.assertIsInstance(ret, dict)
+
+    def test_list_food_by_type2(self):
+        """
+        Post-condition 2: values is the dict are dicts too
+        """
+        lfbt = ep.ListFoodByType(Resource)
+        ret = lfbt.post(KNOWN_FOOD_TYPE)
+        for val in ret.values():
+            self.assertIsInstance(val, dict)
+
     def test_add_food_item(self):
         """
         Test if we can successfully add/create a new food item
@@ -248,13 +282,36 @@ class EndpointTestCase(TestCase):
         dfi = ep.DeleteFoodItem(Resource)
         self.assertIsInstance(ret, str)
 
-    def test_list_order_by_user(self):
+    def test_list_order1(self):
+        """
+        Post-condition 1: return value is a dict
+        """
+        lo = ep.ListOrder()
+        ret = lo.get()
+        self.assertIsInstance(ret, dict)
+    
+    def test_list_order2(self):
+        """
+        Post-condition 2: values in the dict are dicts too
+        """
+        lo = ep.ListOrder()
+        ret = lo.get()
+        for val in ret.values():
+            self.assertIsInstance(val, dict)
+
+    def test_list_order_by_user1(self):
         """
         Post-condition 1: return value is a dict
         """
         lobu = ep.ListOrderByUser()
-        ret = lobu.post("zx811")
+        ret = lobu.post(KNOWN_USER_NM)
         self.assertIsInstance(ret, dict)
+
+    def test_list_order_by_user2(self):
+        lobu = ep.ListOrderByUser()
+        ret = lobu.post(KNOWN_USER_NM)
+        for val in ret.values():
+            self.assertIsInstance(val, dict)
 
     def test_add_review(self):
         """
@@ -265,10 +322,19 @@ class EndpointTestCase(TestCase):
         ret = rv.post(new_review)
         self.assertIsInstance(ret, str)
     
-    def test_list_review(self):
+    def test_list_review1(self):
         """
         Post-condition 1: return value is a dict.
         """
         lr = ep.ListReviews()
         ret = lr.get()
         self.assertIsInstance(ret, dict)
+
+    def test_list_review2(self):
+        """
+        Post-condition 2: values in dict are dicts too
+        """
+        lr = ep.ListReviews()
+        ret = lr.get()
+        for val in ret.values():
+            self.assertIsInstance(ret, dict)
