@@ -7,6 +7,7 @@ import json
 import os
 
 import db.db_connect as dbc
+from datetime import datetime
 
 SWE_HOME = os.environ["SWE_HOME"]
 TEST_MODE = os.environ.get("TEST_MODE", 0)
@@ -52,7 +53,8 @@ COST = "cost"
 ORDER_TYPE = "orderType"
 ORDER_NUMBER = "orderNumber"
 ORDER_NUM = 0
-PHONE_NUMBER = 0
+PHONE_NUMBER = "phoneNumber"
+ORDER_TIME = "orderTime"
 
 REVIEW = "review"
 
@@ -468,8 +470,8 @@ def add_drink_type(typeName):
         return OK
 
 
-def add_order(userName, foodName, drinkName,
-              foodQuanti, drinkQuanti, orderType, phoneNum):
+def add_order(userName, foodName, drinkName, foodQuanti,
+              drinkQuanti, orderType, phoneNum):
     """
     A function to add a new order into the order db.
     """
@@ -480,6 +482,8 @@ def add_order(userName, foodName, drinkName,
     global ORDER_NUM
     ORDER_NUM = ORDER_NUM + 1
     orderNumber = ORDER_NUM
+    now = datetime.now()
+    orderTime = now.strftime("%H:%M:%S")
     if(orderType == "Dine-In"):
         phoneNum = 0
     if(foodName is not None or foodQuanti is not None):
@@ -522,7 +526,8 @@ def add_order(userName, foodName, drinkName,
                 COST: cost,
                 ORDER_TYPE: orderType,
                 ORDER_NUMBER: orderNumber,
-                PHONE_NUMBER: phoneNum
+                PHONE_NUMBER: phoneNum,
+                ORDER_TIME: orderTime
             })
     return OK
 
