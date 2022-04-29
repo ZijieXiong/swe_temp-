@@ -1,7 +1,7 @@
 """
 Get used to pymongo!
 """
-import db.db_connect as dbc
+import db_connect as dbc
 
 COLLECT_NAME = 'email'
 

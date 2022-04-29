@@ -8,17 +8,118 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>db</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/Users/gcallah/GitProjects/flask-api/source/db.py">/Users/gcallah/GitProjects/flask-api/source/db.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/zijie/Desktop/swe_temp-/sweDB/db.py">/home/zijie/Desktop/swe_temp-/sweDB/db.py</a></font></td></tr></table>
     <p><tt>This&nbsp;file&nbsp;will&nbsp;manage&nbsp;interactions&nbsp;with&nbsp;our&nbsp;data&nbsp;store.<br>
 At&nbsp;first,&nbsp;it&nbsp;will&nbsp;just&nbsp;contain&nbsp;stubs&nbsp;that&nbsp;return&nbsp;fake&nbsp;data.<br>
 Gradually,&nbsp;we&nbsp;will&nbsp;fill&nbsp;in&nbsp;actual&nbsp;calls&nbsp;to&nbsp;our&nbsp;datastore.</tt></p>
 <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="db_connect.html">db_connect</a><br>
+</td><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-fetch_pets"><strong>fetch_pets</strong></a>()</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;all&nbsp;pets&nbsp;in&nbsp;the&nbsp;data&nbsp;store.</tt></dd></dl>
-</td></tr></table>
+<td width="100%"><dl><dt><a name="-add_drink_item"><strong>add_drink_item</strong></a>(drinkName, drink_type, price, description)</dt><dd><tt>A&nbsp;function&nbsp;that&nbsp;attempts&nbsp;to&nbsp;add&nbsp;a&nbsp;drink&nbsp;item&nbsp;to&nbsp;the&nbsp;drink&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-add_drink_type"><strong>add_drink_type</strong></a>(typeName)</dt><dd><tt>Function&nbsp;to&nbsp;insert&nbsp;a&nbsp;new&nbsp;drink&nbsp;type&nbsp;into&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-add_food_item"><strong>add_food_item</strong></a>(foodName, food_type, price, description)</dt><dd><tt>Add&nbsp;a&nbsp;food&nbsp;item&nbsp;to&nbsp;the&nbsp;food_menu&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-add_food_type"><strong>add_food_type</strong></a>(typeName)</dt><dd><tt>Function&nbsp;to&nbsp;insert&nbsp;a&nbsp;new&nbsp;food&nbsp;type&nbsp;to&nbsp;the&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-add_order"><strong>add_order</strong></a>(userName, foodName, drinkName, foodQuanti, drinkQuanti, specialReqs, orderType, phoneNum)</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;add&nbsp;a&nbsp;new&nbsp;order&nbsp;into&nbsp;the&nbsp;order&nbsp;db.</tt></dd></dl>
+ <dl><dt><a name="-add_reserve"><strong>add_reserve</strong></a>(userName, time, numOfUsers)</dt><dd><tt>Add&nbsp;a&nbsp;reservation&nbsp;record&nbsp;to&nbsp;the&nbsp;reservation&nbsp;db.</tt></dd></dl>
+ <dl><dt><a name="-add_review"><strong>add_review</strong></a>(review)</dt><dd><tt>This&nbsp;function&nbsp;attempts&nbsp;to&nbsp;add&nbsp;a&nbsp;string&nbsp;to&nbsp;feedback&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-add_user"><strong>add_user</strong></a>(userName, password, type)</dt><dd><tt>Add&nbsp;a&nbsp;user&nbsp;record&nbsp;to&nbsp;the&nbsp;users&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-delete_drink_item"><strong>delete_drink_item</strong></a>(drinkName)</dt><dd><tt>Attempts&nbsp;to&nbsp;delete&nbsp;a&nbsp;drink&nbsp;item&nbsp;from&nbsp;drink_menu&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-delete_food_item"><strong>delete_food_item</strong></a>(foodName)</dt><dd><tt>Deletes&nbsp;a&nbsp;food&nbsp;item&nbsp;from&nbsp;the&nbsp;food_menu&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-delete_order"><strong>delete_order</strong></a>(orderNumber)</dt><dd><tt>Attempts&nbsp;to&nbsp;delete&nbsp;a&nbsp;specific&nbsp;order&nbsp;from&nbsp;order&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-delete_reserve"><strong>delete_reserve</strong></a>(userName, time)</dt><dd><tt>Delete&nbsp;a&nbsp;reservation&nbsp;record&nbsp;from&nbsp;the&nbsp;reservation&nbsp;db.</tt></dd></dl>
+ <dl><dt><a name="-delete_user"><strong>delete_user</strong></a>(userName)</dt><dd><tt>Deletes&nbsp;a&nbsp;user&nbsp;record&nbsp;from&nbsp;the&nbsp;users&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-drink_item_exists"><strong>drink_item_exists</strong></a>(drinkName)</dt><dd><tt>A&nbsp;function&nbsp;that&nbsp;checks&nbsp;if&nbsp;a&nbsp;drink&nbsp;item&nbsp;exists&nbsp;in&nbsp;the&nbsp;drink&nbsp;menu&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-drink_type_exists"><strong>drink_type_exists</strong></a>(typeName)</dt><dd><tt>Function&nbsp;to&nbsp;check&nbsp;if&nbsp;a&nbsp;drink&nbsp;type&nbsp;already&nbsp;exists&nbsp;in&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-food_item_exists"><strong>food_item_exists</strong></a>(foodName)</dt><dd><tt>See&nbsp;if&nbsp;a&nbsp;specific&nbsp;food&nbsp;item&nbsp;already&nbsp;exists&nbsp;in&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-food_type_exists"><strong>food_type_exists</strong></a>(typeName)</dt></dl>
+ <dl><dt><a name="-get_drink_by_type"><strong>get_drink_by_type</strong></a>(typeName)</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;a&nbsp;list&nbsp;of&nbsp;drinks&nbsp;of&nbsp;a&nbsp;certain&nbsp;type</tt></dd></dl>
+ <dl><dt><a name="-get_drink_menu"><strong>get_drink_menu</strong></a>()</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;drink&nbsp;menu&nbsp;stored&nbsp;in&nbsp;data&nbsp;base</tt></dd></dl>
+ <dl><dt><a name="-get_drink_type"><strong>get_drink_type</strong></a>()</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;drink&nbsp;type&nbsp;stored&nbsp;in&nbsp;data&nbsp;base</tt></dd></dl>
+ <dl><dt><a name="-get_food_by_type"><strong>get_food_by_type</strong></a>(typeName)</dt><dd><tt>Function&nbsp;to&nbsp;return&nbsp;food&nbsp;stored&nbsp;in&nbsp;db&nbsp;of&nbsp;a&nbsp;specific&nbsp;type</tt></dd></dl>
+ <dl><dt><a name="-get_food_menu"><strong>get_food_menu</strong></a>()</dt><dd><tt>Function&nbsp;to&nbsp;return&nbsp;the&nbsp;food&nbsp;menu&nbsp;stored&nbsp;in&nbsp;data&nbsp;base</tt></dd></dl>
+ <dl><dt><a name="-get_food_type"><strong>get_food_type</strong></a>()</dt><dd><tt>Function&nbsp;to&nbsp;return&nbsp;food&nbsp;type&nbsp;stored&nbsp;in&nbsp;database</tt></dd></dl>
+ <dl><dt><a name="-get_one_drink_item"><strong>get_one_drink_item</strong></a>(drinkName)</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;a&nbsp;specific&nbsp;drink&nbsp;item&nbsp;in&nbsp;db&nbsp;based&nbsp;on&nbsp;drinkName.</tt></dd></dl>
+ <dl><dt><a name="-get_one_food_item"><strong>get_one_food_item</strong></a>(foodName)</dt><dd><tt>Get&nbsp;a&nbsp;specific&nbsp;food&nbsp;item&nbsp;in&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-get_order"><strong>get_order</strong></a>(orderNumber)</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;a&nbsp;specific&nbsp;order/details&nbsp;of&nbsp;an&nbsp;order</tt></dd></dl>
+ <dl><dt><a name="-get_order_by_user"><strong>get_order_by_user</strong></a>(userName)</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;the&nbsp;oders&nbsp;of&nbsp;a&nbsp;specifc&nbsp;user.</tt></dd></dl>
+ <dl><dt><a name="-get_order_list"><strong>get_order_list</strong></a>()</dt></dl>
+ <dl><dt><a name="-get_reserve"><strong>get_reserve</strong></a>()</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;all&nbsp;reservations</tt></dd></dl>
+ <dl><dt><a name="-get_review_list"><strong>get_review_list</strong></a>()</dt><dd><tt>This&nbsp;function&nbsp;lists&nbsp;every&nbsp;review</tt></dd></dl>
+ <dl><dt><a name="-get_rooms"><strong>get_rooms</strong></a>()</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;all&nbsp;chat&nbsp;rooms</tt></dd></dl>
+ <dl><dt><a name="-get_user"><strong>get_user</strong></a>(userName)</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;one&nbsp;user&nbsp;with&nbsp;the&nbsp;user&nbsp;name</tt></dd></dl>
+ <dl><dt><a name="-get_users"><strong>get_users</strong></a>()</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;return&nbsp;all&nbsp;users</tt></dd></dl>
+ <dl><dt><a name="-order_exists"><strong>order_exists</strong></a>(orderNumber)</dt><dd><tt>Check&nbsp;if&nbsp;an&nbsp;order&nbsp;exists&nbsp;via&nbsp;order&nbsp;number</tt></dd></dl>
+ <dl><dt><a name="-read_collection"><strong>read_collection</strong></a>(perm_version)</dt><dd><tt>A&nbsp;function&nbsp;to&nbsp;read&nbsp;a&nbsp;colleciton&nbsp;off&nbsp;of&nbsp;disk.</tt></dd></dl>
+ <dl><dt><a name="-reserve_exists"><strong>reserve_exists</strong></a>(userName, time)</dt><dd><tt>See&nbsp;if&nbsp;a&nbsp;reservation&nbsp;already&nbsp;exists&nbsp;in&nbsp;a&nbsp;db.<br>
+Return&nbsp;True&nbsp;or&nbsp;False</tt></dd></dl>
+ <dl><dt><a name="-update_drink_item"><strong>update_drink_item</strong></a>(drinkName, new_drinkName, new_drinkType, new_price, new_description, new_pop=-1)</dt><dd><tt>Change&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;food&nbsp;item&nbsp;in&nbsp;food_menu&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-update_food_item"><strong>update_food_item</strong></a>(foodName, new_foodName, new_foodType, new_price, new_description, new_pop=-1)</dt><dd><tt>Change&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;food&nbsp;item&nbsp;in&nbsp;food_menu&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-update_reserve"><strong>update_reserve</strong></a>(userName, time, new_time='', numOfUsers=-1)</dt><dd><tt>Update&nbsp;a&nbsp;reservation&nbsp;record&nbsp;from&nbsp;the&nbsp;reservation&nbsp;db</tt></dd></dl>
+ <dl><dt><a name="-user_exists"><strong>user_exists</strong></a>(userName)</dt><dd><tt>See&nbsp;if&nbsp;a&nbsp;user&nbsp;already&nbsp;exists&nbsp;in&nbsp;a&nbsp;db.<br>
+Return&nbsp;True&nbsp;or&nbsp;False</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>COST</strong> = 'cost'<br>
+<strong>DB_DIR</strong> = '/home/zijie/Desktop/swe_temp-/db'<br>
+<strong>DESCRIPTION</strong> = 'description'<br>
+<strong>DRINKS</strong> = 'drinks'<br>
+<strong>DRINK_MENU</strong> = 'drinkMenu'<br>
+<strong>DRINK_MENU_DB</strong> = '/home/zijie/Desktop/swe_temp-/db/drink_menu.json'<br>
+<strong>DRINK_NAME</strong> = 'drinkName'<br>
+<strong>DRINK_TYPE</strong> = 'drinkType'<br>
+<strong>DUPLICATE</strong> = 2<br>
+<strong>FOOD</strong> = 'food'<br>
+<strong>FOOD_MENU</strong> = 'foodMenu'<br>
+<strong>FOOD_MENU_DB</strong> = '/home/zijie/Desktop/swe_temp-/db/food_menu.json'<br>
+<strong>FOOD_NAME</strong> = 'foodName'<br>
+<strong>FOOD_TYPE</strong> = 'foodType'<br>
+<strong>INVALID</strong> = 3<br>
+<strong>ITEMS</strong> = 'items'<br>
+<strong>NOT_FOUND</strong> = 1<br>
+<strong>NUM_OF_PEOPLE</strong> = 'numOfPeople'<br>
+<strong>OK</strong> = 0<br>
+<strong>ORDERS</strong> = 'orders'<br>
+<strong>ORDER_NUM</strong> = 0<br>
+<strong>ORDER_NUMBER</strong> = 'orderNumber'<br>
+<strong>ORDER_TIME</strong> = 'orderTime'<br>
+<strong>ORDER_TYPE</strong> = 'orderType'<br>
+<strong>PASSWORD</strong> = 'password'<br>
+<strong>PHONE_NUMBER</strong> = 'phoneNumber'<br>
+<strong>POPULARITY</strong> = 'popularity'<br>
+<strong>PRICE</strong> = 'price'<br>
+<strong>QUANTITY</strong> = 'quantity'<br>
+<strong>RESERVE</strong> = 'reservation'<br>
+<strong>REVIEW</strong> = 'review'<br>
+<strong>REVIEW_LIST</strong> = 'reviewList'<br>
+<strong>ROOMS</strong> = 'rooms'<br>
+<strong>ROOMS_DB</strong> = '/home/zijie/Desktop/swe_temp-/db/rooms.json'<br>
+<strong>ROOM_NM</strong> = 'roomName'<br>
+<strong>SPECIAL_REQUESTS</strong> = 'specialReqs'<br>
+<strong>SWE_HOME</strong> = '/home/zijie/Desktop/swe_temp-'<br>
+<strong>TEST_MODE</strong> = '1'<br>
+<strong>TIME</strong> = 'time'<br>
+<strong>TYPE</strong> = 'type'<br>
+<strong>TYPE_NAME</strong> = 'typeName'<br>
+<strong>USER</strong> = 'users'<br>
+<strong>USER_NAME</strong> = 'userName'<br>
+<strong>USER_TYPE</strong> = 'type'</td></tr></table>
 </body></html>

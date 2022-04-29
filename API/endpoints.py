@@ -9,6 +9,8 @@ from flask_restx import Resource, Api, reqparse
 from flask_cors import CORS
 import db.db as db
 import werkzeug.exceptions as wz
+from datetime import datetime
+
 app = Flask(__name__)
 api = Api(app)
 HELLO = 'hello'
@@ -67,6 +69,14 @@ class ListReservation(Resource):
         return db.get_reserve()
 
 
+def to_date(date_string):
+    try:
+        return datetime.strptime(date_string, "%Y-%m-%d %H:%M")
+    except ValueError:
+        raise ValueError(
+            '{} is not valid date YYYY-MM-DD'.format(date_string))
+
+
 @api.route('/reserve/create/<userName>&<time>&<int:numOfPeople>')
 class CreateReserve(Resource):
     """
@@ -79,6 +89,10 @@ class CreateReserve(Resource):
         """
         This method adds a reservation record to reservation db
         """
+        try:
+            to_date(time)
+        except ValueError:
+            return "wrong time format"
         ret = db.add_reserve(userName, time, numOfPeople)
         if ret == db.DUPLICATE:
             raise(wz.NotAcceptable("Reservation already exists."))
@@ -98,6 +112,10 @@ class DeleteReserve(Resource):
         this method deletes an existing reservation record from the
         reservation db
         """
+        try:
+            to_date(time)
+        except ValueError:
+            return "wrong time format"
         ret = db.delete_reserve(userName, time)
         if ret == db.NOT_FOUND:
             raise(wz.NotAcceptable("Reservation could not be found."))
@@ -105,19 +123,19 @@ class DeleteReserve(Resource):
             return "Reservation deleted"
 
 
-@api.route('/reserve/update/<userName>&<time>&<newTime>&<int:newNumOfPeople>')
+@api.route('/reserve/update/<uN>&<time>&<newT>&<int:newNOP>')
 class UpdateReserve(Resource):
     """
     This class updates an existing record of a reservation
     """
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'Reservation not found')
-    def post(self, userName, time, newTime, newNumOfPeople):
+    def post(self, uN, time, newT, newNOP):
         """
         this method updates an existing reservation record
         from the reservation db
         """
-        ret = db.update_reserve(userName, time, newTime, newNumOfPeople)
+        ret = db.update_reserve(uN, time, newT, newNOP)
         if ret == db.NOT_FOUND:
             raise(wz.NotAcceptable("Reservation could not be found."))
         else:

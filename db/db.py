@@ -72,6 +72,14 @@ else:
     print("Successfully connect to MongoDB.")
 
 
+def to_date(date_string):
+    try:
+        return datetime.strptime(date_string, "%Y-%m-%d %H:%M")
+    except ValueError:
+        raise ValueError(
+            '{} is not valid date YYYY-MM-DD'.format(date_string))
+
+
 def read_collection(perm_version):
     """
     A function to read a colleciton off of disk.

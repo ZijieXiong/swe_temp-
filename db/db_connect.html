@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module db_connect</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>db_connect</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/zijie/Desktop/swe_temp-/db/db_connect.py">/home/zijie/Desktop/swe_temp-/db/db_connect.py</a></font></td></tr></table>
+    <p><tt>This&nbsp;file&nbsp;contains&nbsp;some&nbsp;common&nbsp;MongoDB&nbsp;code.</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="bson.json_util.html">bson.json_util</a><br>
+</td><td width="25%" valign=top><a href="json.html">json</a><br>
+</td><td width="25%" valign=top><a href="os.html">os</a><br>
+</td><td width="25%" valign=top><a href="pymongo.html">pymongo</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-del_one"><strong>del_one</strong></a>(collect_nm, filters={})</dt><dd><tt>Delete&nbsp;one&nbsp;record&nbsp;that&nbsp;meets&nbsp;filters.</tt></dd></dl>
+ <dl><dt><a name="-fetch_all"><strong>fetch_all</strong></a>(collect_nm, key_nm, filters={})</dt></dl>
+ <dl><dt><a name="-fetch_all_id"><strong>fetch_all_id</strong></a>(collect_nm, filters={})</dt><dd><tt>This&nbsp;method&nbsp;would&nbsp;return&nbsp;a&nbsp;dictionary&nbsp;use&nbsp;a&nbsp;completely&nbsp;new&nbsp;id&nbsp;as&nbsp;key</tt></dd></dl>
+ <dl><dt><a name="-fetch_one"><strong>fetch_one</strong></a>(collect_nm, filters={})</dt><dd><tt>Fetch&nbsp;one&nbsp;record&nbsp;that&nbsp;meets&nbsp;filters.</tt></dd></dl>
+ <dl><dt><a name="-get_client"><strong>get_client</strong></a>()</dt><dd><tt>This&nbsp;provides&nbsp;a&nbsp;uniform&nbsp;way&nbsp;to&nbsp;get&nbsp;the&nbsp;client&nbsp;across&nbsp;all&nbsp;uses.<br>
+Returns&nbsp;a&nbsp;mongo&nbsp;client&nbsp;object...&nbsp;maybe&nbsp;we&nbsp;shouldn't?<br>
+Also&nbsp;set&nbsp;global&nbsp;client&nbsp;variable.</tt></dd></dl>
+ <dl><dt><a name="-insert_doc"><strong>insert_doc</strong></a>(collect_nm, doc)</dt><dd><tt>Insert&nbsp;one&nbsp;record&nbsp;to&nbsp;a&nbsp;sheet</tt></dd></dl>
+ <dl><dt><a name="-update_one"><strong>update_one</strong></a>(collect_nm, filters={}, data={})</dt><dd><tt>Update&nbsp;one&nbsp;record&nbsp;in&nbsp;a&nbsp;sheet</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>LOCAL</strong> = '1'<br>
+<strong>REMOTE</strong> = '0'<br>
+<strong>client</strong> = None<br>
+<strong>cloud_db</strong> = 'swe.njqsr.mongodb.net'<br>
+<strong>cloud_mdb</strong> = 'mongodb+srv'<br>
+<strong>db_nm</strong> = 'test_sweDB'<br>
+<strong>db_params</strong> = 'retryWrites=true&amp;w=majority'<br>
+<strong>passwd</strong> = 'WAFFLE'<br>
+<strong>user_nm</strong> = 'PANCAKE'</td></tr></table>
+</body></html>

@@ -23,7 +23,7 @@ KNOWN_FOOD_TYPE = "Appetizer"
 KNOWN_DES = "placeholder"
 KNOWN_PRICE = 1
 
-KNOWN_RESERV_TIME = "2021-12-19 00:35:33.134848"
+KNOWN_RESERV_TIME = "2021-12-19 00:35"
 KNOWN_RESERV_NUM = 1
 
 def new_entity_name(entity_type):
@@ -172,8 +172,8 @@ class EndpointTestCase(TestCase):
         """
         cr = ep.CreateReserve(Resource)
         new_reserve = new_entity_name("reserve")
-        ret = cr.post(new_reserve, "2021-12-19 00:35:33.134848", 1)
-        self.assertTrue(db.reserve_exists(new_reserve, "2021-12-19 00:35:33.134848"))
+        ret = cr.post(new_reserve, KNOWN_RESERV_TIME, 1)
+        self.assertTrue(db.reserve_exists(new_reserve, KNOWN_RESERV_TIME))
 
     def test_del_rserveation(self):
         """
