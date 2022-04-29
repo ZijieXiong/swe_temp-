@@ -392,7 +392,7 @@ order_parser.add_argument('foodQuanti', type=int, action='split')
 order_parser.add_argument('drinkQuanti', type=int, action='split')
 
 
-@api.route('/order/new/<userName>&<orderType>')
+@api.route('/order/new/<userName>&<orderType>&<phoneNum>')
 class NewOrder(Resource):
     """
     This class adds a new order to the database.
@@ -401,7 +401,7 @@ class NewOrder(Resource):
     @api.response(HTTPStatus.OK, 'Success')
     @api.response(HTTPStatus.NOT_FOUND, 'NOT FOUND')
     @api.response(HTTPStatus.NOT_ACCEPTABLE, 'Incorrect items input')
-    def post(self, userName, orderType):
+    def post(self, userName, orderType, phoneNum):
         """
         This method adds a new order to the order db.
         """
@@ -410,8 +410,8 @@ class NewOrder(Resource):
         drinkName = args["drinkName"]
         foodQuanti = args['foodQuanti']
         drinkQuanti = args['drinkQuanti']
-        ret = db.add_order(
-            userName, foodName, drinkName, foodQuanti, drinkQuanti, orderType)
+        ret = db.add_order(userName, foodName, drinkName,
+                           foodQuanti, drinkQuanti, orderType, phoneNum)
         if ret == db.NOT_FOUND:
             raise(wz.NotAcceptable("Items not exist"))
         if ret == db.NOT_ACCEPTABLE:

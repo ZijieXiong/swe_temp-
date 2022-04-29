@@ -52,6 +52,7 @@ COST = "cost"
 ORDER_TYPE = "orderType"
 ORDER_NUMBER = "orderNumber"
 ORDER_NUM = 0
+PHONE_NUMBER = 0
 
 REVIEW = "review"
 
@@ -468,7 +469,7 @@ def add_drink_type(typeName):
 
 
 def add_order(userName, foodName, drinkName,
-              foodQuanti, drinkQuanti, orderType):
+              foodQuanti, drinkQuanti, orderType, phoneNum):
     """
     A function to add a new order into the order db.
     """
@@ -479,6 +480,8 @@ def add_order(userName, foodName, drinkName,
     global ORDER_NUM
     ORDER_NUM = ORDER_NUM + 1
     orderNumber = ORDER_NUM
+    if(orderType == "Dine-In"):
+        phoneNum = 0
     if(foodName is not None or foodQuanti is not None):
         if(len(foodName) != len(foodQuanti)):
             return INVALID
@@ -518,7 +521,8 @@ def add_order(userName, foodName, drinkName,
                 ITEMS: items,
                 COST: cost,
                 ORDER_TYPE: orderType,
-                ORDER_NUMBER: orderNumber
+                ORDER_NUMBER: orderNumber,
+                PHONE_NUMBER: phoneNum
             })
     return OK
 
