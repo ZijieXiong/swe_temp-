@@ -50,6 +50,7 @@ DESCRIPTION = "description"
 POPULARITY = "popularity"
 QUANTITY = "quantity"
 COST = "cost"
+SPECIAL_REQUESTS = "specialReqs"
 ORDER_TYPE = "orderType"
 ORDER_NUMBER = "orderNumber"
 ORDER_NUM = 0
@@ -471,7 +472,7 @@ def add_drink_type(typeName):
 
 
 def add_order(userName, foodName, drinkName, foodQuanti,
-              drinkQuanti, orderType, phoneNum):
+              drinkQuanti, specialReqs, orderType, phoneNum):
     """
     A function to add a new order into the order db.
     """
@@ -524,6 +525,7 @@ def add_order(userName, foodName, drinkName, foodQuanti,
                 USER_NAME: userName,
                 ITEMS: items,
                 COST: cost,
+                SPECIAL_REQUESTS: specialReqs,
                 ORDER_TYPE: orderType,
                 ORDER_NUMBER: orderNumber,
                 PHONE_NUMBER: phoneNum,
