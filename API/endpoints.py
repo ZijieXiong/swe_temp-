@@ -432,7 +432,7 @@ class NewOrder(Resource):
                            drinkQuanti, specialReqs, orderType, phoneNum)
         if ret == db.NOT_FOUND:
             raise(wz.NotAcceptable("Items not exist"))
-        if ret == db.NOT_ACCEPTABLE:
+        if ret == db.INVALID:
             raise(wz.NotAcceptable(
                 'Incorrect length between names and quantities.'))
         else:
