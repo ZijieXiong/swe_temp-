@@ -7,7 +7,7 @@ from http import HTTPStatus
 from flask import Flask
 from flask_restx import Resource, Api, reqparse
 from flask_cors import CORS
-import db.db as db
+import db.db_ as db
 import werkzeug.exceptions as wz
 from datetime import datetime
 

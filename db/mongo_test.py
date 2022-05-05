@@ -24,7 +24,7 @@ print(f"{docs=}")
 for doc in docs:
     print(f"{doc=}")
 
-docs = dbc.fetch_all(COLLECT_NAME, "email")
+docs = dbc.fetch_all_id(COLLECT_NAME)
 
 doc = client[dbc.db_nm][COLLECT_NAME].find_one({'trees': 'yellow leaves'})
 print(f"find one = {doc=}")

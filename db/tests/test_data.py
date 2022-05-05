@@ -6,7 +6,7 @@ This file holds the tests for db.py.
 from os import POSIX_FADV_SEQUENTIAL
 from unittest import TestCase, skip
 
-import db.db as db
+import db.db_ as db
 from db.db_connect import client, db_nm
 import random
 

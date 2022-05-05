@@ -4,10 +4,11 @@ This file holds the tests for endpoints.py
 
 import string
 from tokenize import String
-from unittest import TestCase, skip
-from flask_restx import Resource, Api
+from unittest import TestCase, skip, mock
+from flask_restx import Resource, Api, reqparse
+import flask_restx
 import API.endpoints as ep
-import db.db as db
+import db.db_ as db
 from db.db_connect import client, db_nm
 import random
 
@@ -280,6 +281,16 @@ class EndpointTestCase(TestCase):
         foodType = db.get_food_type()
         ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"], 1, "Delicious thing")
         dfi = ep.DeleteFoodItem(Resource)
+        self.assertIsInstance(ret, str)
+    
+    @mock.patch('API.endpoints.order_parser.parse_args')
+    def test_new_order(self, parse_args_mock):
+        """
+        Test if we can successfully add a new order to db
+        """
+        parse_args_mock.return_value = dict(foodName=[KNOWN_FOOD_NAME], drinkName=None, foodQuanti=[1], drinkQuanti=None)
+        no = ep.NewOrder(Resource)
+        ret = no.post(KNOWN_USER_NM, "", "Delivery", "010")
         self.assertIsInstance(ret, str)
 
     def test_list_order1(self):
