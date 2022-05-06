@@ -159,6 +159,17 @@ class EndpointTestCase(TestCase):
         ret = di.post(new_drink_item, list(drinkType.values())[0]["typeName"], 1, 'Placeholder text')
         self.assertTrue(db.drink_item_exists(new_drink_item))
 
+    @mock.patch('API.endpoints.drink_parser.parse_args')
+    def test_add_drink_item(self, parse_args_mock):
+        """
+        Test if we can successfully update a drink item
+        """
+        parse_args_mock.return_value = dict(new_drinkName=None, new_drinkType=None, new_price=10, new_description=None)
+        udi = ep.UpdateDrinkItem(Resource)
+        ret = udi.post(KNOWN_DRINK_NAME)
+        self.assertIsInstance(ret, str)
+        
+
     def test_delete_drink_item(self):
         """
         Test if we can successfully delete a drink item after adding a drink item
@@ -271,10 +282,20 @@ class EndpointTestCase(TestCase):
         foodType = db.get_food_type()
         ret = fi.post(new_food_item, list(foodType.values())[0]["typeName"], 1, "Placeholder text")
         self.assertTrue(db.food_item_exists(new_food_item))
-    
+
+    @mock.patch('API.endpoints.drink_parser.parse_args')
+    def test_update_food_item(self, parse_args_mock):
+        """
+        Test if we can successfully update a food item
+        """
+        parse_args_mock.return_value = dict(new_foodName=None, new_foodType=None, new_price=10, new_description=None)
+        ufi = ep.UpdateFoodItem(Resource)
+        ret = ufi.post(KNOWN_FOOD_NAME)
+        self.assertIsInstance(ret, str)
+
     def test_delete_food_item(self):
         """
-        Test if we can successfully delete a food item after adding a food item
+        Test if we can successfully delete a food item
         """
         fi = ep.NewFoodItem(Resource)
         new_food_item = new_entity_name("food_name")
