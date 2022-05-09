@@ -196,7 +196,7 @@ class LogIn(Resource):
                 user = db.get_user(userName)
                 if(user["password"] == password):
                     return(user["type"])
-        return 0
+        return -1
 
 
 @api.route('/food_menu/new/<foodName>&<foodType>&<int:price>&<foodDes>')

@@ -63,7 +63,7 @@ class EndpointTestCase(TestCase):
         """
         li = ep.LogIn(Resource)
         ret = li.post("", "123")
-        self.assertTrue(ret == 0)
+        self.assertTrue(ret == -1)
 
     def test_log_in3(self):
         """
@@ -71,7 +71,7 @@ class EndpointTestCase(TestCase):
         """    
         li = ep.LogIn(Resource)
         ret = li.post("zx811", "")
-        self.assertTrue(ret == 0)
+        self.assertTrue(ret == -1)
 
     def test_register_user(self):
         """
