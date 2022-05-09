@@ -501,8 +501,8 @@ def add_order(userName, foodName, drinkName, foodQuanti,
         for i in range(len(foodName)):
             if(food_item_exists(foodName[i])):
                 food_item = get_one_food_item(foodName[i])
-                update_food_item(
-                    foodName[i], None, None, None, food_item[POPULARITY]+1)
+                update_food_item(foodName[i], None, None,
+                                 None, None, food_item[POPULARITY]+1)
                 food[foodName[i]] = {
                     FOOD_NAME: foodName[i],
                     QUANTITY: foodQuanti[i],
